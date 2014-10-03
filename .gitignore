@@ -1,0 +1,4 @@
+# Ingoramos los archivos .log y .bak
+
+*.log
+*.bak
