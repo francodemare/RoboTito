@@ -1,0 +1,389 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"heap.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.pvPortMalloc,"ax",%progbits
+  18              		.align	1
+  19              		.global	pvPortMalloc
+  20              		.code	16
+  21              		.thumb_func
+  23              	pvPortMalloc:
+  24              	.LFB0:
+  25              		.file 1 "../Generated_Code/heap.c"
+   1:../Generated_Code/heap.c **** /*
+   2:../Generated_Code/heap.c ****     FreeRTOS V7.2.0 - Copyright (C) 2012 Real Time Engineers Ltd.
+   3:../Generated_Code/heap.c **** 	
+   4:../Generated_Code/heap.c **** 
+   5:../Generated_Code/heap.c ****     ***************************************************************************
+   6:../Generated_Code/heap.c ****      *                                                                       *
+   7:../Generated_Code/heap.c ****      *    FreeRTOS tutorial books are available in pdf and paperback.        *
+   8:../Generated_Code/heap.c ****      *    Complete, revised, and edited pdf reference manuals are also       *
+   9:../Generated_Code/heap.c ****      *    available.                                                         *
+  10:../Generated_Code/heap.c ****      *                                                                       *
+  11:../Generated_Code/heap.c ****      *    Purchasing FreeRTOS documentation will not only help you, by       *
+  12:../Generated_Code/heap.c ****      *    ensuring you get running as quickly as possible and with an        *
+  13:../Generated_Code/heap.c ****      *    in-depth knowledge of how to use FreeRTOS, it will also help       *
+  14:../Generated_Code/heap.c ****      *    the FreeRTOS project to continue with its mission of providing     *
+  15:../Generated_Code/heap.c ****      *    professional grade, cross platform, de facto standard solutions    *
+  16:../Generated_Code/heap.c ****      *    for microcontrollers - completely free of charge!                  *
+  17:../Generated_Code/heap.c ****      *                                                                       *
+  18:../Generated_Code/heap.c ****      *    >>> See http://www.FreeRTOS.org/Documentation for details. <<<     *
+  19:../Generated_Code/heap.c ****      *                                                                       *
+  20:../Generated_Code/heap.c ****      *    Thank you for using FreeRTOS, and thank you for your support!      *
+  21:../Generated_Code/heap.c ****      *                                                                       *
+  22:../Generated_Code/heap.c ****     ***************************************************************************
+  23:../Generated_Code/heap.c **** 
+  24:../Generated_Code/heap.c **** 
+  25:../Generated_Code/heap.c ****     This file is part of the FreeRTOS distribution.
+  26:../Generated_Code/heap.c **** 
+  27:../Generated_Code/heap.c ****     FreeRTOS is free software; you can redistribute it and/or modify it under
+  28:../Generated_Code/heap.c ****     the terms of the GNU General Public License (version 2) as published by the
+  29:../Generated_Code/heap.c ****     Free Software Foundation AND MODIFIED BY the FreeRTOS exception.
+  30:../Generated_Code/heap.c ****     >>>NOTE<<< The modification to the GPL is included to allow you to
+  31:../Generated_Code/heap.c ****     distribute a combined work that includes FreeRTOS without being obliged to
+  32:../Generated_Code/heap.c ****     provide the source code for proprietary components outside of the FreeRTOS
+  33:../Generated_Code/heap.c ****     kernel.  FreeRTOS is distributed in the hope that it will be useful, but
+  34:../Generated_Code/heap.c ****     WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  35:../Generated_Code/heap.c ****     or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+  36:../Generated_Code/heap.c ****     more details. You should have received a copy of the GNU General Public
+  37:../Generated_Code/heap.c ****     License and the FreeRTOS license exception along with FreeRTOS; if not it
+  38:../Generated_Code/heap.c ****     can be viewed here: http://www.freertos.org/a00114.html and also obtained
+  39:../Generated_Code/heap.c ****     by writing to Richard Barry, contact details for whom are available on the
+  40:../Generated_Code/heap.c ****     FreeRTOS WEB site.
+  41:../Generated_Code/heap.c **** 
+  42:../Generated_Code/heap.c ****     1 tab == 4 spaces!
+  43:../Generated_Code/heap.c ****     
+  44:../Generated_Code/heap.c ****     ***************************************************************************
+  45:../Generated_Code/heap.c ****      *                                                                       *
+  46:../Generated_Code/heap.c ****      *    Having a problem?  Start by reading the FAQ "My application does   *
+  47:../Generated_Code/heap.c ****      *    not run, what could be wrong?                                      *
+  48:../Generated_Code/heap.c ****      *                                                                       *
+  49:../Generated_Code/heap.c ****      *    http://www.FreeRTOS.org/FAQHelp.html                               *
+  50:../Generated_Code/heap.c ****      *                                                                       *
+  51:../Generated_Code/heap.c ****     ***************************************************************************
+  52:../Generated_Code/heap.c **** 
+  53:../Generated_Code/heap.c ****     
+  54:../Generated_Code/heap.c ****     http://www.FreeRTOS.org - Documentation, training, latest information, 
+  55:../Generated_Code/heap.c ****     license and contact details.
+  56:../Generated_Code/heap.c ****     
+  57:../Generated_Code/heap.c ****     http://www.FreeRTOS.org/plus - A selection of FreeRTOS ecosystem products,
+  58:../Generated_Code/heap.c ****     including FreeRTOS+Trace - an indispensable productivity tool.
+  59:../Generated_Code/heap.c **** 
+  60:../Generated_Code/heap.c ****     Real Time Engineers ltd license FreeRTOS to High Integrity Systems, who sell 
+  61:../Generated_Code/heap.c ****     the code with commercial support, indemnification, and middleware, under 
+  62:../Generated_Code/heap.c ****     the OpenRTOS brand: http://www.OpenRTOS.com.  High Integrity Systems also
+  63:../Generated_Code/heap.c ****     provide a safety engineered and independently SIL3 certified version under 
+  64:../Generated_Code/heap.c ****     the SafeRTOS brand: http://www.SafeRTOS.com.
+  65:../Generated_Code/heap.c **** */
+  66:../Generated_Code/heap.c **** 
+  67:../Generated_Code/heap.c **** 
+  68:../Generated_Code/heap.c **** /*
+  69:../Generated_Code/heap.c ****  * The simplest possible implementation of pvPortMalloc().  Note that this
+  70:../Generated_Code/heap.c ****  * implementation does NOT allow allocated memory to be freed again.
+  71:../Generated_Code/heap.c ****  *
+  72:../Generated_Code/heap.c ****  * See heap_2.c, heap_3.c and heap_4.c for alternative implementations, and the 
+  73:../Generated_Code/heap.c ****  * memory management pages of http://www.FreeRTOS.org for more information.
+  74:../Generated_Code/heap.c ****  */
+  75:../Generated_Code/heap.c **** #include <stdlib.h>
+  76:../Generated_Code/heap.c **** 
+  77:../Generated_Code/heap.c **** #include "Events.h"
+  78:../Generated_Code/heap.c **** 
+  79:../Generated_Code/heap.c **** /* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining
+  80:../Generated_Code/heap.c **** all the API functions to use the MPU wrappers.  That should only be done when
+  81:../Generated_Code/heap.c **** task.h is included from an application file. */
+  82:../Generated_Code/heap.c **** #define MPU_WRAPPERS_INCLUDED_FROM_API_FILE
+  83:../Generated_Code/heap.c **** 
+  84:../Generated_Code/heap.c **** #include "FreeRTOS.h"
+  85:../Generated_Code/heap.c **** #include "task.h"
+  86:../Generated_Code/heap.c **** 
+  87:../Generated_Code/heap.c **** #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
+  88:../Generated_Code/heap.c **** 
+  89:../Generated_Code/heap.c **** /* Allocate the memory for the heap.  The struct is used to force byte
+  90:../Generated_Code/heap.c **** alignment without using any non-portable code. */
+  91:../Generated_Code/heap.c **** static union xRTOS_HEAP
+  92:../Generated_Code/heap.c **** {
+  93:../Generated_Code/heap.c **** 	#if portBYTE_ALIGNMENT == 8
+  94:../Generated_Code/heap.c **** 		volatile portDOUBLE dDummy;
+  95:../Generated_Code/heap.c **** 	#else
+  96:../Generated_Code/heap.c **** 		volatile unsigned long ulDummy;
+  97:../Generated_Code/heap.c **** 	#endif	
+  98:../Generated_Code/heap.c **** 	unsigned char ucHeap[ configTOTAL_HEAP_SIZE ];
+  99:../Generated_Code/heap.c **** } xHeap;
+ 100:../Generated_Code/heap.c **** 
+ 101:../Generated_Code/heap.c **** static size_t xNextFreeByte = ( size_t ) 0;
+ 102:../Generated_Code/heap.c **** /*-----------------------------------------------------------*/
+ 103:../Generated_Code/heap.c **** 
+ 104:../Generated_Code/heap.c **** void *pvPortMalloc( size_t xWantedSize )
+ 105:../Generated_Code/heap.c **** {
+  26              		.loc 1 105 0
+  27              		.cfi_startproc
+  28              	.LVL0:
+  29 0000 38B5     		push	{r3, r4, r5, lr}
+  30              	.LCFI0:
+  31              		.cfi_def_cfa_offset 16
+  32              		.cfi_offset 3, -16
+  33              		.cfi_offset 4, -12
+  34              		.cfi_offset 5, -8
+  35              		.cfi_offset 14, -4
+ 106:../Generated_Code/heap.c **** void *pvReturn = NULL; 
+ 107:../Generated_Code/heap.c **** 
+ 108:../Generated_Code/heap.c **** 	/* Ensure that blocks are always aligned to the required number of bytes. */
+ 109:../Generated_Code/heap.c **** 	#if portBYTE_ALIGNMENT != 1
+ 110:../Generated_Code/heap.c **** 		if( xWantedSize & portBYTE_ALIGNMENT_MASK )
+  36              		.loc 1 110 0
+  37 0002 0723     		mov	r3, #7
+ 105:../Generated_Code/heap.c **** {
+  38              		.loc 1 105 0
+  39 0004 051C     		mov	r5, r0
+  40              		.loc 1 110 0
+  41 0006 1842     		tst	r0, r3
+  42 0008 01D0     		beq	.L2
+ 111:../Generated_Code/heap.c **** 		{
+ 112:../Generated_Code/heap.c **** 			/* Byte alignment required. */
+ 113:../Generated_Code/heap.c **** 			xWantedSize += ( portBYTE_ALIGNMENT - ( xWantedSize & portBYTE_ALIGNMENT_MASK ) );
+  43              		.loc 1 113 0
+  44 000a 9D43     		bic	r5, r3
+  45 000c 0835     		add	r5, r5, #8
+  46              	.LVL1:
+  47              	.L2:
+ 114:../Generated_Code/heap.c **** 		}
+ 115:../Generated_Code/heap.c **** 	#endif
+ 116:../Generated_Code/heap.c **** 
+ 117:../Generated_Code/heap.c **** 	vTaskSuspendAll();
+  48              		.loc 1 117 0
+  49 000e FFF7FEFF 		bl	vTaskSuspendAll
+  50              	.LVL2:
+ 118:../Generated_Code/heap.c **** 	{
+ 119:../Generated_Code/heap.c **** 		/* Check there is enough room left for the allocation. */
+ 120:../Generated_Code/heap.c **** 		if( ( ( xNextFreeByte + xWantedSize ) < configTOTAL_HEAP_SIZE ) &&
+  51              		.loc 1 120 0
+  52 0012 0A4A     		ldr	r2, .L11
+  53 0014 0A49     		ldr	r1, .L11+4
+  54 0016 1068     		ldr	r0, [r2]
+  55 0018 2D18     		add	r5, r5, r0
+  56              	.LVL3:
+  57 001a 8D42     		cmp	r5, r1
+  58 001c 05D8     		bhi	.L6
+  59              		.loc 1 120 0 is_stmt 0
+  60 001e 8542     		cmp	r5, r0
+  61 0020 03D9     		bls	.L6
+ 121:../Generated_Code/heap.c **** 			( ( xNextFreeByte + xWantedSize ) > xNextFreeByte )	)/* Check for overflow. */
+ 122:../Generated_Code/heap.c **** 		{
+ 123:../Generated_Code/heap.c **** 			/* Return the next free byte then increment the index past this
+ 124:../Generated_Code/heap.c **** 			block. */
+ 125:../Generated_Code/heap.c **** 			pvReturn = &( xHeap.ucHeap[ xNextFreeByte ] );
+  62              		.loc 1 125 0 is_stmt 1
+  63 0022 084B     		ldr	r3, .L11+8
+ 126:../Generated_Code/heap.c **** 			xNextFreeByte += xWantedSize;			
+  64              		.loc 1 126 0
+  65 0024 1560     		str	r5, [r2]
+ 125:../Generated_Code/heap.c **** 			pvReturn = &( xHeap.ucHeap[ xNextFreeByte ] );
+  66              		.loc 1 125 0
+  67 0026 1C18     		add	r4, r3, r0
+  68              	.LVL4:
+  69 0028 00E0     		b	.L3
+  70              	.LVL5:
+  71              	.L6:
+ 106:../Generated_Code/heap.c **** void *pvReturn = NULL; 
+  72              		.loc 1 106 0
+  73 002a 0024     		mov	r4, #0
+  74              	.LVL6:
+  75              	.L3:
+ 127:../Generated_Code/heap.c **** 		}	
+ 128:../Generated_Code/heap.c **** 	}
+ 129:../Generated_Code/heap.c **** 	(void)xTaskResumeAll();
+  76              		.loc 1 129 0
+  77 002c FFF7FEFF 		bl	xTaskResumeAll
+  78              	.LVL7:
+ 130:../Generated_Code/heap.c **** 	
+ 131:../Generated_Code/heap.c **** 	#if( configUSE_MALLOC_FAILED_HOOK == 1 )
+ 132:../Generated_Code/heap.c **** 	{
+ 133:../Generated_Code/heap.c **** 		if( pvReturn == NULL )
+  79              		.loc 1 133 0
+  80 0030 002C     		cmp	r4, #0
+  81 0032 01D1     		bne	.L4
+ 134:../Generated_Code/heap.c **** 		{
+ 135:../Generated_Code/heap.c ****       FRTOS1_vApplicationMallocFailedHook();
+  82              		.loc 1 135 0
+  83 0034 FFF7FEFF 		bl	FRTOS1_vApplicationMallocFailedHook
+  84              	.LVL8:
+  85              	.L4:
+ 136:../Generated_Code/heap.c **** 		}
+ 137:../Generated_Code/heap.c **** 	}
+ 138:../Generated_Code/heap.c **** 	#endif	
+ 139:../Generated_Code/heap.c **** 
+ 140:../Generated_Code/heap.c **** 	return pvReturn;
+ 141:../Generated_Code/heap.c **** }
+  86              		.loc 1 141 0
+  87 0038 201C     		mov	r0, r4
+  88              		@ sp needed for prologue
+  89              	.LVL9:
+  90 003a 38BD     		pop	{r3, r4, r5, pc}
+  91              	.L12:
+  92              		.align	2
+  93              	.L11:
+  94 003c 00000000 		.word	.LANCHOR0
+  95 0040 4B1D0000 		.word	7499
+  96 0044 00000000 		.word	.LANCHOR1
+  97              		.cfi_endproc
+  98              	.LFE0:
+ 100              		.section	.text.vPortFree,"ax",%progbits
+ 101              		.align	1
+ 102              		.global	vPortFree
+ 103              		.code	16
+ 104              		.thumb_func
+ 106              	vPortFree:
+ 107              	.LFB1:
+ 142:../Generated_Code/heap.c **** /*-----------------------------------------------------------*/
+ 143:../Generated_Code/heap.c **** 
+ 144:../Generated_Code/heap.c **** void vPortFree( void *pv )
+ 145:../Generated_Code/heap.c **** {
+ 108              		.loc 1 145 0
+ 109              		.cfi_startproc
+ 110              	.LVL10:
+ 111 0000 00B5     		push	{lr}
+ 112              	.LCFI1:
+ 113              		.cfi_def_cfa_offset 4
+ 114              		.cfi_offset 14, -4
+ 146:../Generated_Code/heap.c **** 	/* Memory cannot be freed using this scheme.  See heap_2.c, heap_3.c and
+ 147:../Generated_Code/heap.c **** 	heap_4.c for alternative implementations, and the memory management pages of 
+ 148:../Generated_Code/heap.c **** 	http://www.FreeRTOS.org for more information. */
+ 149:../Generated_Code/heap.c **** 	( void ) pv;
+ 150:../Generated_Code/heap.c **** 	
+ 151:../Generated_Code/heap.c **** 	/* Force an assert as it is invalid to call this function. */
+ 152:../Generated_Code/heap.c **** 	configASSERT( pv == NULL );
+ 115              		.loc 1 152 0
+ 116 0002 0028     		cmp	r0, #0
+ 117 0004 03D0     		beq	.L13
+ 118              		.loc 1 152 0 is_stmt 0
+ 119              	@ 152 "../Generated_Code/heap.c" 1
+ 120 0006 5020     		  mov r0, #80 
+ 121 0008 80F31188 	  msr basepri, r0 
+ 122              	
+ 123              	@ 0 "" 2
+ 124              	.LVL11:
+ 125              		.code	16
+ 126              	.L15:
+ 127 000c FEE7     		b	.L15
+ 128              	.LVL12:
+ 129              	.L13:
+ 153:../Generated_Code/heap.c **** }
+ 130              		.loc 1 153 0 is_stmt 1
+ 131              		@ sp needed for prologue
+ 132 000e 00BD     		pop	{pc}
+ 133              		.cfi_endproc
+ 134              	.LFE1:
+ 136              		.section	.text.vPortInitialiseBlocks,"ax",%progbits
+ 137              		.align	1
+ 138              		.global	vPortInitialiseBlocks
+ 139              		.code	16
+ 140              		.thumb_func
+ 142              	vPortInitialiseBlocks:
+ 143              	.LFB2:
+ 154:../Generated_Code/heap.c **** /*-----------------------------------------------------------*/
+ 155:../Generated_Code/heap.c **** 
+ 156:../Generated_Code/heap.c **** void vPortInitialiseBlocks( void )
+ 157:../Generated_Code/heap.c **** {
+ 144              		.loc 1 157 0
+ 145              		.cfi_startproc
+ 158:../Generated_Code/heap.c **** 	/* Only required when static memory is not cleared. */
+ 159:../Generated_Code/heap.c **** 	xNextFreeByte = ( size_t ) 0;
+ 146              		.loc 1 159 0
+ 147 0000 014B     		ldr	r3, .L17
+ 148 0002 0022     		mov	r2, #0
+ 149 0004 1A60     		str	r2, [r3]
+ 160:../Generated_Code/heap.c **** }
+ 150              		.loc 1 160 0
+ 151              		@ sp needed for prologue
+ 152 0006 7047     		bx	lr
+ 153              	.L18:
+ 154              		.align	2
+ 155              	.L17:
+ 156 0008 00000000 		.word	.LANCHOR0
+ 157              		.cfi_endproc
+ 158              	.LFE2:
+ 160              		.section	.text.xPortGetFreeHeapSize,"ax",%progbits
+ 161              		.align	1
+ 162              		.global	xPortGetFreeHeapSize
+ 163              		.code	16
+ 164              		.thumb_func
+ 166              	xPortGetFreeHeapSize:
+ 167              	.LFB3:
+ 161:../Generated_Code/heap.c **** /*-----------------------------------------------------------*/
+ 162:../Generated_Code/heap.c **** 
+ 163:../Generated_Code/heap.c **** size_t xPortGetFreeHeapSize( void )
+ 164:../Generated_Code/heap.c **** {
+ 168              		.loc 1 164 0
+ 169              		.cfi_startproc
+ 165:../Generated_Code/heap.c **** 	return ( configTOTAL_HEAP_SIZE - xNextFreeByte );
+ 170              		.loc 1 165 0
+ 171 0000 024B     		ldr	r3, .L20
+ 172 0002 0348     		ldr	r0, .L20+4
+ 173 0004 1968     		ldr	r1, [r3]
+ 166:../Generated_Code/heap.c **** }
+ 174              		.loc 1 166 0
+ 175              		@ sp needed for prologue
+ 165:../Generated_Code/heap.c **** 	return ( configTOTAL_HEAP_SIZE - xNextFreeByte );
+ 176              		.loc 1 165 0
+ 177 0006 401A     		sub	r0, r0, r1
+ 178              		.loc 1 166 0
+ 179 0008 7047     		bx	lr
+ 180              	.L21:
+ 181 000a C046     		.align	2
+ 182              	.L20:
+ 183 000c 00000000 		.word	.LANCHOR0
+ 184 0010 4C1D0000 		.word	7500
+ 185              		.cfi_endproc
+ 186              	.LFE3:
+ 188              		.section	.bss.xNextFreeByte,"aw",%nobits
+ 189              		.align	2
+ 190              		.set	.LANCHOR0,. + 0
+ 193              	xNextFreeByte:
+ 194 0000 00000000 		.space	4
+ 195              		.section	.bss.xHeap,"aw",%nobits
+ 196              		.align	3
+ 197              		.set	.LANCHOR1,. + 0
+ 200              	xHeap:
+ 201 0000 00000000 		.space	7504
+ 201      00000000 
+ 201      00000000 
+ 201      00000000 
+ 201      00000000 
+ 202              		.text
+ 203              	.Letext0:
+ 204              		.file 2 "C:/Freescale/CW MCU v10.6/MCU/ARM_GCC_Support/ewl/EWL_C/include/size_t.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 heap.c
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:18     .text.pvPortMalloc:00000000 $t
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:23     .text.pvPortMalloc:00000000 pvPortMalloc
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:94     .text.pvPortMalloc:0000003c $d
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:101    .text.vPortFree:00000000 $t
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:106    .text.vPortFree:00000000 vPortFree
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:137    .text.vPortInitialiseBlocks:00000000 $t
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:142    .text.vPortInitialiseBlocks:00000000 vPortInitialiseBlocks
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:156    .text.vPortInitialiseBlocks:00000008 $d
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:161    .text.xPortGetFreeHeapSize:00000000 $t
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:166    .text.xPortGetFreeHeapSize:00000000 xPortGetFreeHeapSize
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:183    .text.xPortGetFreeHeapSize:0000000c $d
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:189    .bss.xNextFreeByte:00000000 $d
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:193    .bss.xNextFreeByte:00000000 xNextFreeByte
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:196    .bss.xHeap:00000000 $d
+C:\Users\Franco\AppData\Local\Temp\ccLfutXy.s:200    .bss.xHeap:00000000 xHeap
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+vTaskSuspendAll
+xTaskResumeAll
+FRTOS1_vApplicationMallocFailedHook

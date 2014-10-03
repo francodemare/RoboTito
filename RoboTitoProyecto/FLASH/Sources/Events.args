@@ -1,0 +1,21 @@
+-mcpu=cortex-m0
+-mthumb
+-mfloat-abi=soft
+-g3
+-gdwarf-2
+-gstrict-dwarf
+-nostdinc
+-I"C:/Users/Franco/workspace/RoboTito/RoboTitoProyecto/Project_Headers"
+-I"C:/Users/Franco/workspace/RoboTito/RoboTitoProyecto/Project_Settings/Startup_Code"
+-I"C:/Freescale/CW MCU v10.6/MCU/ARM_GCC_Support/ewl/EWL_C/include"
+-I"C:/Freescale/CW MCU v10.6/MCU/ARM_GCC_Support/ewl/EWL_Runtime/include"
+-I"C:/Users/Franco/workspace/RoboTito/RoboTitoProyecto/Generated_Code"
+-I"C:/Users/Franco/workspace/RoboTito/RoboTitoProyecto/Sources"
+-I"C:/Freescale/CW MCU v10.6/MCU/ProcessorExpert/lib/Kinetis/iofiles"
+-I"C:/Freescale/CW MCU v10.6/MCU/ProcessorExpert/lib/Kinetis/pdd/inc"
+-Os
+-ffunction-sections
+-fdata-sections
+-Wall
+-c
+-fmessage-length=0

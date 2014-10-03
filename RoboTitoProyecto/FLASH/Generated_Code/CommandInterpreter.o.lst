@@ -1,0 +1,995 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"CommandInterpreter.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.prvHelpCommand,"ax",%progbits
+  18              		.align	1
+  19              		.code	16
+  20              		.thumb_func
+  22              	prvHelpCommand:
+  23              	.LFB5:
+  24              		.file 1 "../Generated_Code/CommandInterpreter.c"
+   1:../Generated_Code/CommandInterpreter.c **** /*
+   2:../Generated_Code/CommandInterpreter.c ****     FreeRTOS V7.2.0 - Copyright (C) 2012 Real Time Engineers Ltd.
+   3:../Generated_Code/CommandInterpreter.c **** 	
+   4:../Generated_Code/CommandInterpreter.c **** 
+   5:../Generated_Code/CommandInterpreter.c ****     ***************************************************************************
+   6:../Generated_Code/CommandInterpreter.c ****      *                                                                       *
+   7:../Generated_Code/CommandInterpreter.c ****      *    FreeRTOS tutorial books are available in pdf and paperback.        *
+   8:../Generated_Code/CommandInterpreter.c ****      *    Complete, revised, and edited pdf reference manuals are also       *
+   9:../Generated_Code/CommandInterpreter.c ****      *    available.                                                         *
+  10:../Generated_Code/CommandInterpreter.c ****      *                                                                       *
+  11:../Generated_Code/CommandInterpreter.c ****      *    Purchasing FreeRTOS documentation will not only help you, by       *
+  12:../Generated_Code/CommandInterpreter.c ****      *    ensuring you get running as quickly as possible and with an        *
+  13:../Generated_Code/CommandInterpreter.c ****      *    in-depth knowledge of how to use FreeRTOS, it will also help       *
+  14:../Generated_Code/CommandInterpreter.c ****      *    the FreeRTOS project to continue with its mission of providing     *
+  15:../Generated_Code/CommandInterpreter.c ****      *    professional grade, cross platform, de facto standard solutions    *
+  16:../Generated_Code/CommandInterpreter.c ****      *    for microcontrollers - completely free of charge!                  *
+  17:../Generated_Code/CommandInterpreter.c ****      *                                                                       *
+  18:../Generated_Code/CommandInterpreter.c ****      *    >>> See http://www.FreeRTOS.org/Documentation for details. <<<     *
+  19:../Generated_Code/CommandInterpreter.c ****      *                                                                       *
+  20:../Generated_Code/CommandInterpreter.c ****      *    Thank you for using FreeRTOS, and thank you for your support!      *
+  21:../Generated_Code/CommandInterpreter.c ****      *                                                                       *
+  22:../Generated_Code/CommandInterpreter.c ****     ***************************************************************************
+  23:../Generated_Code/CommandInterpreter.c **** 
+  24:../Generated_Code/CommandInterpreter.c **** 
+  25:../Generated_Code/CommandInterpreter.c ****     This file is part of the FreeRTOS distribution.
+  26:../Generated_Code/CommandInterpreter.c **** 
+  27:../Generated_Code/CommandInterpreter.c ****     FreeRTOS is free software; you can redistribute it and/or modify it under
+  28:../Generated_Code/CommandInterpreter.c ****     the terms of the GNU General Public License (version 2) as published by the
+  29:../Generated_Code/CommandInterpreter.c ****     Free Software Foundation AND MODIFIED BY the FreeRTOS exception.
+  30:../Generated_Code/CommandInterpreter.c ****     >>>NOTE<<< The modification to the GPL is included to allow you to
+  31:../Generated_Code/CommandInterpreter.c ****     distribute a combined work that includes FreeRTOS without being obliged to
+  32:../Generated_Code/CommandInterpreter.c ****     provide the source code for proprietary components outside of the FreeRTOS
+  33:../Generated_Code/CommandInterpreter.c ****     kernel.  FreeRTOS is distributed in the hope that it will be useful, but
+  34:../Generated_Code/CommandInterpreter.c ****     WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  35:../Generated_Code/CommandInterpreter.c ****     or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+  36:../Generated_Code/CommandInterpreter.c ****     more details. You should have received a copy of the GNU General Public
+  37:../Generated_Code/CommandInterpreter.c ****     License and the FreeRTOS license exception along with FreeRTOS; if not it
+  38:../Generated_Code/CommandInterpreter.c ****     can be viewed here: http://www.freertos.org/a00114.html and also obtained
+  39:../Generated_Code/CommandInterpreter.c ****     by writing to Richard Barry, contact details for whom are available on the
+  40:../Generated_Code/CommandInterpreter.c ****     FreeRTOS WEB site.
+  41:../Generated_Code/CommandInterpreter.c **** 
+  42:../Generated_Code/CommandInterpreter.c ****     1 tab == 4 spaces!
+  43:../Generated_Code/CommandInterpreter.c **** 
+  44:../Generated_Code/CommandInterpreter.c ****     http://www.FreeRTOS.org - Documentation, latest information, license and
+  45:../Generated_Code/CommandInterpreter.c ****     contact details.
+  46:../Generated_Code/CommandInterpreter.c **** 
+  47:../Generated_Code/CommandInterpreter.c ****     http://www.SafeRTOS.com - A version that is certified for use in safety
+  48:../Generated_Code/CommandInterpreter.c ****     critical systems.
+  49:../Generated_Code/CommandInterpreter.c **** 
+  50:../Generated_Code/CommandInterpreter.c ****     http://www.OpenRTOS.com - Commercial support, development, porting,
+  51:../Generated_Code/CommandInterpreter.c ****     licensing and training services.
+  52:../Generated_Code/CommandInterpreter.c **** */
+  53:../Generated_Code/CommandInterpreter.c **** 
+  54:../Generated_Code/CommandInterpreter.c **** /* Standard includes. */
+  55:../Generated_Code/CommandInterpreter.c **** #include <string.h>
+  56:../Generated_Code/CommandInterpreter.c **** 
+  57:../Generated_Code/CommandInterpreter.c **** /* FreeRTOS includes. */
+  58:../Generated_Code/CommandInterpreter.c **** #include "FreeRTOS.h"
+  59:../Generated_Code/CommandInterpreter.c **** #include "task.h"
+  60:../Generated_Code/CommandInterpreter.c **** 
+  61:../Generated_Code/CommandInterpreter.c **** /* Utils includes. */
+  62:../Generated_Code/CommandInterpreter.c **** #include "CommandInterpreter.h"
+  63:../Generated_Code/CommandInterpreter.c **** 
+  64:../Generated_Code/CommandInterpreter.c **** typedef struct xCOMMAND_INPUT_LIST
+  65:../Generated_Code/CommandInterpreter.c **** {
+  66:../Generated_Code/CommandInterpreter.c **** 	const xCommandLineInput *pxCommandLineDefinition;
+  67:../Generated_Code/CommandInterpreter.c **** 	struct xCOMMAND_INPUT_LIST *pxNext;
+  68:../Generated_Code/CommandInterpreter.c **** } xCommandLineInputListItem;
+  69:../Generated_Code/CommandInterpreter.c **** 
+  70:../Generated_Code/CommandInterpreter.c **** /*
+  71:../Generated_Code/CommandInterpreter.c ****  * The callback function that is executed when "help" is entered.  This is the
+  72:../Generated_Code/CommandInterpreter.c ****  * only default command that is always present.
+  73:../Generated_Code/CommandInterpreter.c ****  */
+  74:../Generated_Code/CommandInterpreter.c **** static portBASE_TYPE prvHelpCommand( signed char *pcWriteBuffer, size_t xWriteBufferLen, const sign
+  75:../Generated_Code/CommandInterpreter.c **** 
+  76:../Generated_Code/CommandInterpreter.c **** /*
+  77:../Generated_Code/CommandInterpreter.c ****  * Return the number of parameters that follow the command name.
+  78:../Generated_Code/CommandInterpreter.c ****  */
+  79:../Generated_Code/CommandInterpreter.c **** static signed char prvGetNumberOfParameters( const signed char * pcCommandString );
+  80:../Generated_Code/CommandInterpreter.c **** 
+  81:../Generated_Code/CommandInterpreter.c **** /* The definition of the "help" command.  This command is always at the front
+  82:../Generated_Code/CommandInterpreter.c **** of the list of registered commands. */
+  83:../Generated_Code/CommandInterpreter.c **** static const xCommandLineInput xHelpCommand = 
+  84:../Generated_Code/CommandInterpreter.c **** {
+  85:../Generated_Code/CommandInterpreter.c **** 	( const signed char * const ) "help",
+  86:../Generated_Code/CommandInterpreter.c **** 	( const signed char * const ) "help: Lists all the registered commands\r\n",
+  87:../Generated_Code/CommandInterpreter.c **** 	prvHelpCommand,
+  88:../Generated_Code/CommandInterpreter.c **** 	0
+  89:../Generated_Code/CommandInterpreter.c **** };
+  90:../Generated_Code/CommandInterpreter.c **** 
+  91:../Generated_Code/CommandInterpreter.c **** /* The definition of the list of commands.  Commands that are registered are
+  92:../Generated_Code/CommandInterpreter.c **** added to this list. */
+  93:../Generated_Code/CommandInterpreter.c **** static xCommandLineInputListItem xRegisteredCommands =
+  94:../Generated_Code/CommandInterpreter.c **** {	
+  95:../Generated_Code/CommandInterpreter.c **** 	&xHelpCommand,	/* The first command in the list is always the help command, defined in this file. 
+  96:../Generated_Code/CommandInterpreter.c **** 	NULL			/* The next pointer is initialised to NULL, as there are no other registered commands yet. 
+  97:../Generated_Code/CommandInterpreter.c **** };
+  98:../Generated_Code/CommandInterpreter.c **** 
+  99:../Generated_Code/CommandInterpreter.c **** /* A buffer into which command outputs can be written is declared here, rather
+ 100:../Generated_Code/CommandInterpreter.c **** than in the command console implementation, to allow multiple command consoles
+ 101:../Generated_Code/CommandInterpreter.c **** to share the same buffer.  For example, an application may allow access to the
+ 102:../Generated_Code/CommandInterpreter.c **** command interpreter by UART and by Ethernet.  Sharing a buffer is done purely
+ 103:../Generated_Code/CommandInterpreter.c **** to save RAM.  Note, however, that the command console itself is not re-entrant,
+ 104:../Generated_Code/CommandInterpreter.c **** so only one command interpreter interface can be used at any one time.  For that
+ 105:../Generated_Code/CommandInterpreter.c **** reason, no attempt at providing mutual exclusion to the cOutputBuffer array is
+ 106:../Generated_Code/CommandInterpreter.c **** attempted. */
+ 107:../Generated_Code/CommandInterpreter.c **** static signed char cOutputBuffer[ configCOMMAND_INT_MAX_OUTPUT_SIZE ];
+ 108:../Generated_Code/CommandInterpreter.c **** 
+ 109:../Generated_Code/CommandInterpreter.c **** /*-----------------------------------------------------------*/
+ 110:../Generated_Code/CommandInterpreter.c **** 
+ 111:../Generated_Code/CommandInterpreter.c **** portBASE_TYPE xCmdIntRegisterCommand( const xCommandLineInput * const pxCommandToRegister )
+ 112:../Generated_Code/CommandInterpreter.c **** {
+ 113:../Generated_Code/CommandInterpreter.c **** static xCommandLineInputListItem *pxLastCommandInList = &xRegisteredCommands;
+ 114:../Generated_Code/CommandInterpreter.c **** xCommandLineInputListItem *pxNewListItem;
+ 115:../Generated_Code/CommandInterpreter.c **** portBASE_TYPE xReturn = pdFAIL;
+ 116:../Generated_Code/CommandInterpreter.c **** 
+ 117:../Generated_Code/CommandInterpreter.c **** 	/* Check the parameter is not NULL. */
+ 118:../Generated_Code/CommandInterpreter.c **** 	configASSERT( pxCommandToRegister );
+ 119:../Generated_Code/CommandInterpreter.c **** 
+ 120:../Generated_Code/CommandInterpreter.c **** 	/* Create a new list item that will reference the command being registered. */
+ 121:../Generated_Code/CommandInterpreter.c **** 	pxNewListItem = ( xCommandLineInputListItem * ) pvPortMalloc( sizeof( xCommandLineInputListItem ) 
+ 122:../Generated_Code/CommandInterpreter.c **** 	configASSERT( pxNewListItem );
+ 123:../Generated_Code/CommandInterpreter.c **** 
+ 124:../Generated_Code/CommandInterpreter.c **** 	if( pxNewListItem != NULL )
+ 125:../Generated_Code/CommandInterpreter.c **** 	{
+ 126:../Generated_Code/CommandInterpreter.c **** 		taskENTER_CRITICAL();
+ 127:../Generated_Code/CommandInterpreter.c **** 		{
+ 128:../Generated_Code/CommandInterpreter.c **** 			/* Reference the command being registered from the newly created 
+ 129:../Generated_Code/CommandInterpreter.c **** 			list item. */
+ 130:../Generated_Code/CommandInterpreter.c **** 			pxNewListItem->pxCommandLineDefinition = pxCommandToRegister;
+ 131:../Generated_Code/CommandInterpreter.c **** 
+ 132:../Generated_Code/CommandInterpreter.c **** 			/* The new list item will get added to the end of the list, so 
+ 133:../Generated_Code/CommandInterpreter.c **** 			pxNext has nowhere to point. */
+ 134:../Generated_Code/CommandInterpreter.c **** 			pxNewListItem->pxNext = NULL;
+ 135:../Generated_Code/CommandInterpreter.c **** 
+ 136:../Generated_Code/CommandInterpreter.c **** 			/* Add the newly created list item to the end of the already existing
+ 137:../Generated_Code/CommandInterpreter.c **** 			list. */
+ 138:../Generated_Code/CommandInterpreter.c **** 			pxLastCommandInList->pxNext = pxNewListItem;
+ 139:../Generated_Code/CommandInterpreter.c **** 
+ 140:../Generated_Code/CommandInterpreter.c **** 			/* Set the end of list marker to the new list item. */
+ 141:../Generated_Code/CommandInterpreter.c **** 			pxLastCommandInList = pxNewListItem;
+ 142:../Generated_Code/CommandInterpreter.c **** 		}
+ 143:../Generated_Code/CommandInterpreter.c **** 		taskEXIT_CRITICAL();
+ 144:../Generated_Code/CommandInterpreter.c **** 		
+ 145:../Generated_Code/CommandInterpreter.c **** 		xReturn = pdPASS;
+ 146:../Generated_Code/CommandInterpreter.c **** 	}
+ 147:../Generated_Code/CommandInterpreter.c **** 
+ 148:../Generated_Code/CommandInterpreter.c **** 	return xReturn;
+ 149:../Generated_Code/CommandInterpreter.c **** }
+ 150:../Generated_Code/CommandInterpreter.c **** /*-----------------------------------------------------------*/
+ 151:../Generated_Code/CommandInterpreter.c **** 
+ 152:../Generated_Code/CommandInterpreter.c **** portBASE_TYPE xCmdIntProcessCommand( const signed char * const pcCommandInput, signed char * pcWrit
+ 153:../Generated_Code/CommandInterpreter.c **** {
+ 154:../Generated_Code/CommandInterpreter.c **** static const xCommandLineInputListItem *pxCommand = NULL;
+ 155:../Generated_Code/CommandInterpreter.c **** portBASE_TYPE xReturn = pdTRUE;
+ 156:../Generated_Code/CommandInterpreter.c **** const signed char *pcRegisteredCommandString;
+ 157:../Generated_Code/CommandInterpreter.c **** 
+ 158:../Generated_Code/CommandInterpreter.c **** 	/* Note:  This function is not re-entrant.  It must not be called from more
+ 159:../Generated_Code/CommandInterpreter.c **** 	thank one task. */
+ 160:../Generated_Code/CommandInterpreter.c **** 
+ 161:../Generated_Code/CommandInterpreter.c **** 	if( pxCommand == NULL )
+ 162:../Generated_Code/CommandInterpreter.c **** 	{
+ 163:../Generated_Code/CommandInterpreter.c **** 		/* Search for the command string in the list of registered commands. */
+ 164:../Generated_Code/CommandInterpreter.c **** 		for( pxCommand = &xRegisteredCommands; pxCommand != NULL; pxCommand = pxCommand->pxNext )
+ 165:../Generated_Code/CommandInterpreter.c **** 		{
+ 166:../Generated_Code/CommandInterpreter.c **** 			pcRegisteredCommandString = pxCommand->pxCommandLineDefinition->pcCommand;
+ 167:../Generated_Code/CommandInterpreter.c **** 			if( strncmp( ( const char * ) pcCommandInput, ( const char * ) pcRegisteredCommandString, strlen
+ 168:../Generated_Code/CommandInterpreter.c **** 			{
+ 169:../Generated_Code/CommandInterpreter.c **** 				/* The command has been found.  Check it has the expected
+ 170:../Generated_Code/CommandInterpreter.c **** 				number of parameters.  If cExpectedNumberOfParameters is -1,
+ 171:../Generated_Code/CommandInterpreter.c **** 				then there could be a variable number of parameters and no
+ 172:../Generated_Code/CommandInterpreter.c **** 				check is made. */
+ 173:../Generated_Code/CommandInterpreter.c **** 				if( pxCommand->pxCommandLineDefinition->cExpectedNumberOfParameters >= 0 )
+ 174:../Generated_Code/CommandInterpreter.c **** 				{
+ 175:../Generated_Code/CommandInterpreter.c **** 					if( prvGetNumberOfParameters( pcCommandInput ) != pxCommand->pxCommandLineDefinition->cExpecte
+ 176:../Generated_Code/CommandInterpreter.c **** 					{
+ 177:../Generated_Code/CommandInterpreter.c **** 						xReturn = pdFALSE;
+ 178:../Generated_Code/CommandInterpreter.c **** 					}
+ 179:../Generated_Code/CommandInterpreter.c **** 				}
+ 180:../Generated_Code/CommandInterpreter.c **** 
+ 181:../Generated_Code/CommandInterpreter.c **** 				break;
+ 182:../Generated_Code/CommandInterpreter.c **** 			}
+ 183:../Generated_Code/CommandInterpreter.c **** 		}
+ 184:../Generated_Code/CommandInterpreter.c **** 	}
+ 185:../Generated_Code/CommandInterpreter.c **** 
+ 186:../Generated_Code/CommandInterpreter.c **** 	if( ( pxCommand != NULL ) && ( xReturn == pdFALSE ) )
+ 187:../Generated_Code/CommandInterpreter.c **** 	{
+ 188:../Generated_Code/CommandInterpreter.c **** 		/* The command was found, but the number of parameters with the command
+ 189:../Generated_Code/CommandInterpreter.c **** 		was incorrect. */
+ 190:../Generated_Code/CommandInterpreter.c **** 		(void)strncpy( ( char * ) pcWriteBuffer, "Incorrect command parameter(s).  Enter \"help\" to view
+ 191:../Generated_Code/CommandInterpreter.c **** 		pxCommand = NULL;
+ 192:../Generated_Code/CommandInterpreter.c **** 	}
+ 193:../Generated_Code/CommandInterpreter.c **** 	else if( pxCommand != NULL )
+ 194:../Generated_Code/CommandInterpreter.c **** 	{
+ 195:../Generated_Code/CommandInterpreter.c **** 		/* Call the callback function that is registered to this command. */
+ 196:../Generated_Code/CommandInterpreter.c **** 		xReturn = pxCommand->pxCommandLineDefinition->pxCommandInterpreter( pcWriteBuffer, xWriteBufferLe
+ 197:../Generated_Code/CommandInterpreter.c **** 
+ 198:../Generated_Code/CommandInterpreter.c **** 		/* If xReturn is pdFALSE, then no further strings will be returned
+ 199:../Generated_Code/CommandInterpreter.c **** 		after this one, and	pxCommand can be reset to NULL ready to search 
+ 200:../Generated_Code/CommandInterpreter.c **** 		for the next entered command. */
+ 201:../Generated_Code/CommandInterpreter.c **** 		if( xReturn == pdFALSE )
+ 202:../Generated_Code/CommandInterpreter.c **** 		{
+ 203:../Generated_Code/CommandInterpreter.c **** 			pxCommand = NULL;
+ 204:../Generated_Code/CommandInterpreter.c **** 		}
+ 205:../Generated_Code/CommandInterpreter.c **** 	}
+ 206:../Generated_Code/CommandInterpreter.c **** 	else
+ 207:../Generated_Code/CommandInterpreter.c **** 	{
+ 208:../Generated_Code/CommandInterpreter.c **** 		/* pxCommand was NULL, the command was not found. */
+ 209:../Generated_Code/CommandInterpreter.c **** 		(void)strncpy( ( char * ) pcWriteBuffer, ( const char * const ) "Command not recognised.  Enter \
+ 210:../Generated_Code/CommandInterpreter.c **** 		xReturn = pdFALSE;
+ 211:../Generated_Code/CommandInterpreter.c **** 	}
+ 212:../Generated_Code/CommandInterpreter.c **** 
+ 213:../Generated_Code/CommandInterpreter.c **** 	return xReturn;
+ 214:../Generated_Code/CommandInterpreter.c **** }
+ 215:../Generated_Code/CommandInterpreter.c **** /*-----------------------------------------------------------*/
+ 216:../Generated_Code/CommandInterpreter.c **** 
+ 217:../Generated_Code/CommandInterpreter.c **** signed char *pcCmdIntGetOutputBuffer( void )
+ 218:../Generated_Code/CommandInterpreter.c **** {
+ 219:../Generated_Code/CommandInterpreter.c **** 	return cOutputBuffer;
+ 220:../Generated_Code/CommandInterpreter.c **** }
+ 221:../Generated_Code/CommandInterpreter.c **** /*-----------------------------------------------------------*/
+ 222:../Generated_Code/CommandInterpreter.c **** 
+ 223:../Generated_Code/CommandInterpreter.c **** unsigned portBASE_TYPE uxCmdIntGetOutputBufferSizeBytes( void )
+ 224:../Generated_Code/CommandInterpreter.c **** {
+ 225:../Generated_Code/CommandInterpreter.c **** 	return configCOMMAND_INT_MAX_OUTPUT_SIZE;
+ 226:../Generated_Code/CommandInterpreter.c **** }
+ 227:../Generated_Code/CommandInterpreter.c **** /*-----------------------------------------------------------*/
+ 228:../Generated_Code/CommandInterpreter.c **** 
+ 229:../Generated_Code/CommandInterpreter.c **** const signed char *pcCmdIntGetParameter( const signed char *pcCommandString, unsigned portBASE_TYPE
+ 230:../Generated_Code/CommandInterpreter.c **** {
+ 231:../Generated_Code/CommandInterpreter.c **** unsigned portBASE_TYPE uxParametersFound = 0;
+ 232:../Generated_Code/CommandInterpreter.c **** const signed char *pcReturn = NULL;
+ 233:../Generated_Code/CommandInterpreter.c **** 
+ 234:../Generated_Code/CommandInterpreter.c **** 	*pxParameterStringLength = 0;
+ 235:../Generated_Code/CommandInterpreter.c **** 
+ 236:../Generated_Code/CommandInterpreter.c **** 	while( uxParametersFound < uxWantedParameter )
+ 237:../Generated_Code/CommandInterpreter.c **** 	{
+ 238:../Generated_Code/CommandInterpreter.c **** 		/* Index the character pointer past the current word.  If this is the start
+ 239:../Generated_Code/CommandInterpreter.c **** 		of the command string then the first word is the command itself. */
+ 240:../Generated_Code/CommandInterpreter.c **** 		while( ( ( *pcCommandString ) != 0x00 ) && ( ( *pcCommandString ) != ' ' ) )
+ 241:../Generated_Code/CommandInterpreter.c **** 		{
+ 242:../Generated_Code/CommandInterpreter.c **** 			pcCommandString++;
+ 243:../Generated_Code/CommandInterpreter.c **** 		}
+ 244:../Generated_Code/CommandInterpreter.c **** 
+ 245:../Generated_Code/CommandInterpreter.c **** 		/* Find the start of the next string. */
+ 246:../Generated_Code/CommandInterpreter.c **** 		while( ( ( *pcCommandString ) != 0x00 ) && ( ( *pcCommandString ) == ' ' ) )
+ 247:../Generated_Code/CommandInterpreter.c **** 		{
+ 248:../Generated_Code/CommandInterpreter.c **** 			pcCommandString++;
+ 249:../Generated_Code/CommandInterpreter.c **** 		}
+ 250:../Generated_Code/CommandInterpreter.c **** 
+ 251:../Generated_Code/CommandInterpreter.c **** 		/* Was a string found? */
+ 252:../Generated_Code/CommandInterpreter.c **** 		if( *pcCommandString != 0x00 )
+ 253:../Generated_Code/CommandInterpreter.c **** 		{
+ 254:../Generated_Code/CommandInterpreter.c **** 			/* Is this the start of the required parameter? */
+ 255:../Generated_Code/CommandInterpreter.c **** 			uxParametersFound++;
+ 256:../Generated_Code/CommandInterpreter.c **** 
+ 257:../Generated_Code/CommandInterpreter.c **** 			if( uxParametersFound == uxWantedParameter )
+ 258:../Generated_Code/CommandInterpreter.c **** 			{
+ 259:../Generated_Code/CommandInterpreter.c **** 				/* How long is the parameter? */
+ 260:../Generated_Code/CommandInterpreter.c **** 				pcReturn = pcCommandString;
+ 261:../Generated_Code/CommandInterpreter.c **** 				while( ( ( *pcCommandString ) != 0x00 ) && ( ( *pcCommandString ) != ' ' ) )
+ 262:../Generated_Code/CommandInterpreter.c **** 				{
+ 263:../Generated_Code/CommandInterpreter.c **** 					( *pxParameterStringLength )++;
+ 264:../Generated_Code/CommandInterpreter.c **** 					pcCommandString++;
+ 265:../Generated_Code/CommandInterpreter.c **** 				}
+ 266:../Generated_Code/CommandInterpreter.c **** 
+ 267:../Generated_Code/CommandInterpreter.c **** 				break;
+ 268:../Generated_Code/CommandInterpreter.c **** 			}
+ 269:../Generated_Code/CommandInterpreter.c **** 		}
+ 270:../Generated_Code/CommandInterpreter.c **** 		else
+ 271:../Generated_Code/CommandInterpreter.c **** 		{
+ 272:../Generated_Code/CommandInterpreter.c **** 			break;
+ 273:../Generated_Code/CommandInterpreter.c **** 		}
+ 274:../Generated_Code/CommandInterpreter.c **** 	}
+ 275:../Generated_Code/CommandInterpreter.c **** 
+ 276:../Generated_Code/CommandInterpreter.c **** 	return pcReturn;
+ 277:../Generated_Code/CommandInterpreter.c **** }
+ 278:../Generated_Code/CommandInterpreter.c **** /*-----------------------------------------------------------*/
+ 279:../Generated_Code/CommandInterpreter.c **** 
+ 280:../Generated_Code/CommandInterpreter.c **** static portBASE_TYPE prvHelpCommand( signed char *pcWriteBuffer, size_t xWriteBufferLen, const sign
+ 281:../Generated_Code/CommandInterpreter.c **** {
+  25              		.loc 1 281 0
+  26              		.cfi_startproc
+  27              	.LVL0:
+  28 0000 38B5     		push	{r3, r4, r5, lr}
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 16
+  31              		.cfi_offset 3, -16
+  32              		.cfi_offset 4, -12
+  33              		.cfi_offset 5, -8
+  34              		.cfi_offset 14, -4
+ 282:../Generated_Code/CommandInterpreter.c **** static const xCommandLineInputListItem * pxCommand = NULL;
+ 283:../Generated_Code/CommandInterpreter.c **** signed portBASE_TYPE xReturn;
+ 284:../Generated_Code/CommandInterpreter.c **** 
+ 285:../Generated_Code/CommandInterpreter.c **** 	( void ) pcCommandString;
+ 286:../Generated_Code/CommandInterpreter.c **** 
+ 287:../Generated_Code/CommandInterpreter.c **** 	if( pxCommand == NULL )
+  35              		.loc 1 287 0
+  36 0002 084C     		ldr	r4, .L4
+ 281:../Generated_Code/CommandInterpreter.c **** {
+  37              		.loc 1 281 0
+  38 0004 0A1C     		mov	r2, r1
+  39              	.LVL1:
+  40              		.loc 1 287 0
+  41 0006 2368     		ldr	r3, [r4]
+  42 0008 002B     		cmp	r3, #0
+  43 000a 01D1     		bne	.L2
+ 288:../Generated_Code/CommandInterpreter.c **** 	{
+ 289:../Generated_Code/CommandInterpreter.c **** 		/* Reset the pxCommand pointer back to the start of the list. */
+ 290:../Generated_Code/CommandInterpreter.c **** 		pxCommand = &xRegisteredCommands;
+  44              		.loc 1 290 0
+  45 000c 0649     		ldr	r1, .L4+4
+  46              	.LVL2:
+  47 000e 2160     		str	r1, [r4]
+  48              	.L2:
+ 291:../Generated_Code/CommandInterpreter.c **** 	}
+ 292:../Generated_Code/CommandInterpreter.c **** 
+ 293:../Generated_Code/CommandInterpreter.c **** 	/* Return the next command help string, before moving the pointer on to
+ 294:../Generated_Code/CommandInterpreter.c **** 	the next command in the list. */
+ 295:../Generated_Code/CommandInterpreter.c **** 	(void)strncpy( ( char * ) pcWriteBuffer, ( const char * ) pxCommand->pxCommandLineDefinition->pcHe
+  49              		.loc 1 295 0
+  50 0010 2568     		ldr	r5, [r4]
+ 296:../Generated_Code/CommandInterpreter.c **** 	pxCommand = pxCommand->pxNext;
+ 297:../Generated_Code/CommandInterpreter.c **** 
+ 298:../Generated_Code/CommandInterpreter.c **** 	if( pxCommand == NULL )
+ 299:../Generated_Code/CommandInterpreter.c **** 	{
+ 300:../Generated_Code/CommandInterpreter.c **** 		/* There are no more commands in the list, so there will be no more
+ 301:../Generated_Code/CommandInterpreter.c **** 		strings to return after this one and pdFALSE should be returned. */
+ 302:../Generated_Code/CommandInterpreter.c **** 		xReturn = pdFALSE;
+ 303:../Generated_Code/CommandInterpreter.c **** 	}
+ 304:../Generated_Code/CommandInterpreter.c **** 	else
+ 305:../Generated_Code/CommandInterpreter.c **** 	{
+ 306:../Generated_Code/CommandInterpreter.c **** 		xReturn = pdTRUE;
+ 307:../Generated_Code/CommandInterpreter.c **** 	}
+ 308:../Generated_Code/CommandInterpreter.c **** 
+ 309:../Generated_Code/CommandInterpreter.c **** 	return xReturn;
+ 310:../Generated_Code/CommandInterpreter.c **** }
+  51              		.loc 1 310 0
+  52              		@ sp needed for prologue
+ 295:../Generated_Code/CommandInterpreter.c **** 	(void)strncpy( ( char * ) pcWriteBuffer, ( const char * ) pxCommand->pxCommandLineDefinition->pcHe
+  53              		.loc 1 295 0
+  54 0012 2B68     		ldr	r3, [r5]
+  55 0014 5968     		ldr	r1, [r3, #4]
+  56 0016 FFF7FEFF 		bl	strncpy
+  57              	.LVL3:
+ 296:../Generated_Code/CommandInterpreter.c **** 	pxCommand = pxCommand->pxNext;
+  58              		.loc 1 296 0
+  59 001a 6868     		ldr	r0, [r5, #4]
+  60 001c 2060     		str	r0, [r4]
+  61              	.LVL4:
+ 298:../Generated_Code/CommandInterpreter.c **** 	if( pxCommand == NULL )
+  62              		.loc 1 298 0
+  63 001e 431E     		sub	r3, r0, #1
+  64 0020 9841     		sbc	r0, r0, r3
+  65              	.LVL5:
+  66              	.LVL6:
+  67              		.loc 1 310 0
+  68 0022 38BD     		pop	{r3, r4, r5, pc}
+  69              	.L5:
+  70              		.align	2
+  71              	.L4:
+  72 0024 00000000 		.word	.LANCHOR0
+  73 0028 00000000 		.word	.LANCHOR1
+  74              		.cfi_endproc
+  75              	.LFE5:
+  77              		.section	.text.xCmdIntRegisterCommand,"ax",%progbits
+  78              		.align	1
+  79              		.global	xCmdIntRegisterCommand
+  80              		.code	16
+  81              		.thumb_func
+  83              	xCmdIntRegisterCommand:
+  84              	.LFB0:
+ 112:../Generated_Code/CommandInterpreter.c **** {
+  85              		.loc 1 112 0
+  86              		.cfi_startproc
+  87              	.LVL7:
+  88 0000 38B5     		push	{r3, r4, r5, lr}
+  89              	.LCFI1:
+  90              		.cfi_def_cfa_offset 16
+  91              		.cfi_offset 3, -16
+  92              		.cfi_offset 4, -12
+  93              		.cfi_offset 5, -8
+  94              		.cfi_offset 14, -4
+ 112:../Generated_Code/CommandInterpreter.c **** {
+  95              		.loc 1 112 0
+  96 0002 051E     		sub	r5, r0, #0
+ 118:../Generated_Code/CommandInterpreter.c **** 	configASSERT( pxCommandToRegister );
+  97              		.loc 1 118 0
+  98 0004 03D1     		bne	.L7
+ 118:../Generated_Code/CommandInterpreter.c **** 	configASSERT( pxCommandToRegister );
+  99              		.loc 1 118 0 is_stmt 0
+ 100              	@ 118 "../Generated_Code/CommandInterpreter.c" 1
+ 101 0006 5020     		  mov r0, #80 
+ 102 0008 80F31188 	  msr basepri, r0 
+ 103              	
+ 104              	@ 0 "" 2
+ 105              	.LVL8:
+ 106              		.code	16
+ 107              	.L8:
+ 108 000c FEE7     		b	.L8
+ 109              	.LVL9:
+ 110              	.L7:
+ 121:../Generated_Code/CommandInterpreter.c **** 	pxNewListItem = ( xCommandLineInputListItem * ) pvPortMalloc( sizeof( xCommandLineInputListItem ) 
+ 111              		.loc 1 121 0 is_stmt 1
+ 112 000e 0820     		mov	r0, #8
+ 113              	.LVL10:
+ 114 0010 FFF7FEFF 		bl	pvPortMalloc
+ 115              	.LVL11:
+ 116 0014 041E     		sub	r4, r0, #0
+ 117              	.LVL12:
+ 122:../Generated_Code/CommandInterpreter.c **** 	configASSERT( pxNewListItem );
+ 118              		.loc 1 122 0
+ 119 0016 03D1     		bne	.L9
+ 122:../Generated_Code/CommandInterpreter.c **** 	configASSERT( pxNewListItem );
+ 120              		.loc 1 122 0 is_stmt 0
+ 121              	@ 122 "../Generated_Code/CommandInterpreter.c" 1
+ 122 0018 5020     		  mov r0, #80 
+ 123 001a 80F31188 	  msr basepri, r0 
+ 124              	
+ 125              	@ 0 "" 2
+ 126              	.LVL13:
+ 127              		.code	16
+ 128              	.L10:
+ 129 001e FEE7     		b	.L10
+ 130              	.LVL14:
+ 131              	.L9:
+ 126:../Generated_Code/CommandInterpreter.c **** 		taskENTER_CRITICAL();
+ 132              		.loc 1 126 0 is_stmt 1
+ 133 0020 FFF7FEFF 		bl	vPortEnterCritical
+ 134              	.LVL15:
+ 138:../Generated_Code/CommandInterpreter.c **** 			pxLastCommandInList->pxNext = pxNewListItem;
+ 135              		.loc 1 138 0
+ 136 0024 0548     		ldr	r0, .L11
+ 134:../Generated_Code/CommandInterpreter.c **** 			pxNewListItem->pxNext = NULL;
+ 137              		.loc 1 134 0
+ 138 0026 0023     		mov	r3, #0
+ 138:../Generated_Code/CommandInterpreter.c **** 			pxLastCommandInList->pxNext = pxNewListItem;
+ 139              		.loc 1 138 0
+ 140 0028 0268     		ldr	r2, [r0]
+ 130:../Generated_Code/CommandInterpreter.c **** 			pxNewListItem->pxCommandLineDefinition = pxCommandToRegister;
+ 141              		.loc 1 130 0
+ 142 002a 2560     		str	r5, [r4]
+ 134:../Generated_Code/CommandInterpreter.c **** 			pxNewListItem->pxNext = NULL;
+ 143              		.loc 1 134 0
+ 144 002c 6360     		str	r3, [r4, #4]
+ 138:../Generated_Code/CommandInterpreter.c **** 			pxLastCommandInList->pxNext = pxNewListItem;
+ 145              		.loc 1 138 0
+ 146 002e 5460     		str	r4, [r2, #4]
+ 141:../Generated_Code/CommandInterpreter.c **** 			pxLastCommandInList = pxNewListItem;
+ 147              		.loc 1 141 0
+ 148 0030 0460     		str	r4, [r0]
+ 149:../Generated_Code/CommandInterpreter.c **** }
+ 149              		.loc 1 149 0
+ 150              		@ sp needed for prologue
+ 143:../Generated_Code/CommandInterpreter.c **** 		taskEXIT_CRITICAL();
+ 151              		.loc 1 143 0
+ 152 0032 FFF7FEFF 		bl	vPortExitCritical
+ 153              	.LVL16:
+ 149:../Generated_Code/CommandInterpreter.c **** }
+ 154              		.loc 1 149 0
+ 155 0036 0120     		mov	r0, #1
+ 156              	.LVL17:
+ 157              	.LVL18:
+ 158 0038 38BD     		pop	{r3, r4, r5, pc}
+ 159              	.L12:
+ 160 003a C046     		.align	2
+ 161              	.L11:
+ 162 003c 00000000 		.word	.LANCHOR2
+ 163              		.cfi_endproc
+ 164              	.LFE0:
+ 166              		.section	.text.xCmdIntProcessCommand,"ax",%progbits
+ 167              		.align	1
+ 168              		.global	xCmdIntProcessCommand
+ 169              		.code	16
+ 170              		.thumb_func
+ 172              	xCmdIntProcessCommand:
+ 173              	.LFB1:
+ 153:../Generated_Code/CommandInterpreter.c **** {
+ 174              		.loc 1 153 0
+ 175              		.cfi_startproc
+ 176              	.LVL19:
+ 177 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 178              	.LCFI2:
+ 179              		.cfi_def_cfa_offset 20
+ 180              		.cfi_offset 4, -20
+ 181              		.cfi_offset 5, -16
+ 182              		.cfi_offset 6, -12
+ 183              		.cfi_offset 7, -8
+ 184              		.cfi_offset 14, -4
+ 161:../Generated_Code/CommandInterpreter.c **** 	if( pxCommand == NULL )
+ 185              		.loc 1 161 0
+ 186 0002 2B4D     		ldr	r5, .L33
+ 153:../Generated_Code/CommandInterpreter.c **** {
+ 187              		.loc 1 153 0
+ 188 0004 85B0     		sub	sp, sp, #20
+ 189              	.LCFI3:
+ 190              		.cfi_def_cfa_offset 40
+ 161:../Generated_Code/CommandInterpreter.c **** 	if( pxCommand == NULL )
+ 191              		.loc 1 161 0
+ 192 0006 2B68     		ldr	r3, [r5]
+ 153:../Generated_Code/CommandInterpreter.c **** {
+ 193              		.loc 1 153 0
+ 194 0008 0290     		str	r0, [sp, #8]
+ 195 000a 0F1C     		mov	r7, r1
+ 196 000c 0392     		str	r2, [sp, #12]
+ 161:../Generated_Code/CommandInterpreter.c **** 	if( pxCommand == NULL )
+ 197              		.loc 1 161 0
+ 198 000e 002B     		cmp	r3, #0
+ 199 0010 01D0     		beq	.L14
+ 200              	.LVL20:
+ 201              	.L19:
+ 155:../Generated_Code/CommandInterpreter.c **** portBASE_TYPE xReturn = pdTRUE;
+ 202              		.loc 1 155 0
+ 203 0012 0124     		mov	r4, #1
+ 204 0014 2DE0     		b	.L15
+ 205              	.LVL21:
+ 206              	.L14:
+ 164:../Generated_Code/CommandInterpreter.c **** 		for( pxCommand = &xRegisteredCommands; pxCommand != NULL; pxCommand = pxCommand->pxNext )
+ 207              		.loc 1 164 0
+ 208 0016 2748     		ldr	r0, .L33+4
+ 209              	.LVL22:
+ 210 0018 2860     		str	r0, [r5]
+ 211              	.LVL23:
+ 212              	.L16:
+ 164:../Generated_Code/CommandInterpreter.c **** 		for( pxCommand = &xRegisteredCommands; pxCommand != NULL; pxCommand = pxCommand->pxNext )
+ 213              		.loc 1 164 0 is_stmt 0
+ 214 001a 2C68     		ldr	r4, [r5]
+ 215 001c 002C     		cmp	r4, #0
+ 216 001e F8D0     		beq	.L19
+ 217              	.L22:
+ 166:../Generated_Code/CommandInterpreter.c **** 			pcRegisteredCommandString = pxCommand->pxCommandLineDefinition->pcCommand;
+ 218              		.loc 1 166 0 is_stmt 1
+ 219 0020 2668     		ldr	r6, [r4]
+ 220 0022 3168     		ldr	r1, [r6]
+ 167:../Generated_Code/CommandInterpreter.c **** 			if( strncmp( ( const char * ) pcCommandInput, ( const char * ) pcRegisteredCommandString, strlen
+ 221              		.loc 1 167 0
+ 222 0024 081C     		mov	r0, r1
+ 166:../Generated_Code/CommandInterpreter.c **** 			pcRegisteredCommandString = pxCommand->pxCommandLineDefinition->pcCommand;
+ 223              		.loc 1 166 0
+ 224 0026 0191     		str	r1, [sp, #4]
+ 225              	.LVL24:
+ 167:../Generated_Code/CommandInterpreter.c **** 			if( strncmp( ( const char * ) pcCommandInput, ( const char * ) pcRegisteredCommandString, strlen
+ 226              		.loc 1 167 0
+ 227 0028 FFF7FEFF 		bl	strlen
+ 228              	.LVL25:
+ 229 002c 0199     		ldr	r1, [sp, #4]
+ 230 002e 021C     		mov	r2, r0
+ 231 0030 0298     		ldr	r0, [sp, #8]
+ 232 0032 FFF7FEFF 		bl	strncmp
+ 233              	.LVL26:
+ 234 0036 0028     		cmp	r0, #0
+ 235 0038 18D1     		bne	.L17
+ 173:../Generated_Code/CommandInterpreter.c **** 				if( pxCommand->pxCommandLineDefinition->cExpectedNumberOfParameters >= 0 )
+ 236              		.loc 1 173 0
+ 237 003a 0C23     		mov	r3, #12
+ 238 003c F656     		ldrsb	r6, [r6, r3]
+ 239 003e 002E     		cmp	r6, #0
+ 240 0040 E7DB     		blt	.L19
+ 241              	.L26:
+ 242 0042 0299     		ldr	r1, [sp, #8]
+ 243 0044 021C     		mov	r2, r0
+ 244              	.L18:
+ 245              	.LVL27:
+ 246              	.LBB4:
+ 247              	.LBB5:
+ 311:../Generated_Code/CommandInterpreter.c **** /*-----------------------------------------------------------*/
+ 312:../Generated_Code/CommandInterpreter.c **** 
+ 313:../Generated_Code/CommandInterpreter.c **** static signed char prvGetNumberOfParameters( const signed char * pcCommandString )
+ 314:../Generated_Code/CommandInterpreter.c **** {
+ 315:../Generated_Code/CommandInterpreter.c **** signed char cParameters = 0;
+ 316:../Generated_Code/CommandInterpreter.c **** portBASE_TYPE xLastCharacterWasSpace = pdFALSE;
+ 317:../Generated_Code/CommandInterpreter.c **** 
+ 318:../Generated_Code/CommandInterpreter.c **** 	/* Count the number of space delimited words in pcCommandString. */
+ 319:../Generated_Code/CommandInterpreter.c **** 	while( *pcCommandString != 0x00 )
+ 248              		.loc 1 319 0
+ 249 0046 0C78     		ldrb	r4, [r1]
+ 250 0048 002C     		cmp	r4, #0
+ 251 004a 0AD0     		beq	.L32
+ 252              	.L21:
+ 320:../Generated_Code/CommandInterpreter.c **** 	{
+ 321:../Generated_Code/CommandInterpreter.c **** 		if( ( *pcCommandString ) == ' ' )
+ 253              		.loc 1 321 0
+ 254 004c 202C     		cmp	r4, #32
+ 255 004e 05D1     		bne	.L27
+ 322:../Generated_Code/CommandInterpreter.c **** 		{
+ 323:../Generated_Code/CommandInterpreter.c **** 			if( xLastCharacterWasSpace != pdTRUE )
+ 256              		.loc 1 323 0
+ 257 0050 0128     		cmp	r0, #1
+ 258 0052 04D0     		beq	.L20
+ 324:../Generated_Code/CommandInterpreter.c **** 			{
+ 325:../Generated_Code/CommandInterpreter.c **** 				cParameters++;
+ 259              		.loc 1 325 0
+ 260 0054 0132     		add	r2, r2, #1
+ 261              	.LVL28:
+ 262 0056 D2B2     		uxtb	r2, r2
+ 263              	.LVL29:
+ 326:../Generated_Code/CommandInterpreter.c **** 				xLastCharacterWasSpace = pdTRUE;
+ 264              		.loc 1 326 0
+ 265 0058 0120     		mov	r0, #1
+ 266 005a 00E0     		b	.L20
+ 267              	.LVL30:
+ 268              	.L27:
+ 327:../Generated_Code/CommandInterpreter.c **** 			}
+ 328:../Generated_Code/CommandInterpreter.c **** 		}
+ 329:../Generated_Code/CommandInterpreter.c **** 		else
+ 330:../Generated_Code/CommandInterpreter.c **** 		{
+ 331:../Generated_Code/CommandInterpreter.c **** 			xLastCharacterWasSpace = pdFALSE;
+ 269              		.loc 1 331 0
+ 270 005c 0020     		mov	r0, #0
+ 271              	.LVL31:
+ 272              	.L20:
+ 332:../Generated_Code/CommandInterpreter.c **** 		}
+ 333:../Generated_Code/CommandInterpreter.c **** 
+ 334:../Generated_Code/CommandInterpreter.c **** 		pcCommandString++;
+ 273              		.loc 1 334 0
+ 274 005e 0131     		add	r1, r1, #1
+ 275              	.LVL32:
+ 276 0060 F1E7     		b	.L18
+ 277              	.L32:
+ 175:../Generated_Code/CommandInterpreter.c **** 					if( prvGetNumberOfParameters( pcCommandInput ) != pxCommand->pxCommandLineDefinition->cExpecte
+ 278              		.loc 1 175 0
+ 279 0062 50B2     		sxtb	r0, r2
+ 280              	.LVL33:
+ 281 0064 841B     		sub	r4, r0, r6
+ 155:../Generated_Code/CommandInterpreter.c **** portBASE_TYPE xReturn = pdTRUE;
+ 282              		.loc 1 155 0
+ 283 0066 6142     		neg	r1, r4
+ 284 0068 4C41     		adc	r4, r4, r1
+ 285              	.LVL34:
+ 286 006a 02E0     		b	.L15
+ 287              	.LVL35:
+ 288              	.L17:
+ 289              	.LBE5:
+ 290              	.LBE4:
+ 164:../Generated_Code/CommandInterpreter.c **** 		for( pxCommand = &xRegisteredCommands; pxCommand != NULL; pxCommand = pxCommand->pxNext )
+ 291              		.loc 1 164 0
+ 292 006c 6268     		ldr	r2, [r4, #4]
+ 293 006e 2A60     		str	r2, [r5]
+ 294 0070 D3E7     		b	.L16
+ 295              	.LVL36:
+ 296              	.L15:
+ 186:../Generated_Code/CommandInterpreter.c **** 	if( ( pxCommand != NULL ) && ( xReturn == pdFALSE ) )
+ 297              		.loc 1 186 0
+ 298 0072 2E68     		ldr	r6, [r5]
+ 299 0074 002E     		cmp	r6, #0
+ 300 0076 11D0     		beq	.L23
+ 186:../Generated_Code/CommandInterpreter.c **** 	if( ( pxCommand != NULL ) && ( xReturn == pdFALSE ) )
+ 301              		.loc 1 186 0 is_stmt 0
+ 302 0078 002C     		cmp	r4, #0
+ 303 007a 05D1     		bne	.L24
+ 190:../Generated_Code/CommandInterpreter.c **** 		(void)strncpy( ( char * ) pcWriteBuffer, "Incorrect command parameter(s).  Enter \"help\" to view
+ 304              		.loc 1 190 0 is_stmt 1
+ 305 007c 381C     		mov	r0, r7
+ 306 007e 0E49     		ldr	r1, .L33+8
+ 307 0080 039A     		ldr	r2, [sp, #12]
+ 308 0082 FFF7FEFF 		bl	strncpy
+ 309              	.LVL37:
+ 310 0086 07E0     		b	.L31
+ 311              	.L24:
+ 196:../Generated_Code/CommandInterpreter.c **** 		xReturn = pxCommand->pxCommandLineDefinition->pxCommandInterpreter( pcWriteBuffer, xWriteBufferLe
+ 312              		.loc 1 196 0
+ 313 0088 3368     		ldr	r3, [r6]
+ 314 008a 381C     		mov	r0, r7
+ 315 008c 9E68     		ldr	r6, [r3, #8]
+ 316 008e 0399     		ldr	r1, [sp, #12]
+ 317 0090 029A     		ldr	r2, [sp, #8]
+ 318 0092 B047     		blx	r6
+ 319              	.LVL38:
+ 320 0094 041E     		sub	r4, r0, #0
+ 321              	.LVL39:
+ 201:../Generated_Code/CommandInterpreter.c **** 		if( xReturn == pdFALSE )
+ 322              		.loc 1 201 0
+ 323 0096 07D1     		bne	.L25
+ 324              	.LVL40:
+ 325              	.L31:
+ 203:../Generated_Code/CommandInterpreter.c **** 			pxCommand = NULL;
+ 326              		.loc 1 203 0
+ 327 0098 2C60     		str	r4, [r5]
+ 328 009a 05E0     		b	.L25
+ 329              	.L23:
+ 209:../Generated_Code/CommandInterpreter.c **** 		(void)strncpy( ( char * ) pcWriteBuffer, ( const char * const ) "Command not recognised.  Enter \
+ 330              		.loc 1 209 0
+ 331 009c 381C     		mov	r0, r7
+ 332 009e 0749     		ldr	r1, .L33+12
+ 333 00a0 039A     		ldr	r2, [sp, #12]
+ 334 00a2 FFF7FEFF 		bl	strncpy
+ 335              	.LVL41:
+ 210:../Generated_Code/CommandInterpreter.c **** 		xReturn = pdFALSE;
+ 336              		.loc 1 210 0
+ 337 00a6 341C     		mov	r4, r6
+ 338              	.LVL42:
+ 339              	.L25:
+ 214:../Generated_Code/CommandInterpreter.c **** }
+ 340              		.loc 1 214 0
+ 341 00a8 201C     		mov	r0, r4
+ 342 00aa 05B0     		add	sp, sp, #20
+ 343              		@ sp needed for prologue
+ 344              	.LVL43:
+ 345              	.LVL44:
+ 346 00ac F0BD     		pop	{r4, r5, r6, r7, pc}
+ 347              	.L34:
+ 348 00ae C046     		.align	2
+ 349              	.L33:
+ 350 00b0 00000000 		.word	.LANCHOR3
+ 351 00b4 00000000 		.word	.LANCHOR1
+ 352 00b8 00000000 		.word	.LC7
+ 353 00bc 58000000 		.word	.LC9
+ 354              		.cfi_endproc
+ 355              	.LFE1:
+ 357              		.section	.text.pcCmdIntGetOutputBuffer,"ax",%progbits
+ 358              		.align	1
+ 359              		.global	pcCmdIntGetOutputBuffer
+ 360              		.code	16
+ 361              		.thumb_func
+ 363              	pcCmdIntGetOutputBuffer:
+ 364              	.LFB2:
+ 218:../Generated_Code/CommandInterpreter.c **** {
+ 365              		.loc 1 218 0
+ 366              		.cfi_startproc
+ 220:../Generated_Code/CommandInterpreter.c **** }
+ 367              		.loc 1 220 0
+ 368 0000 0048     		ldr	r0, .L36
+ 369              		@ sp needed for prologue
+ 370 0002 7047     		bx	lr
+ 371              	.L37:
+ 372              		.align	2
+ 373              	.L36:
+ 374 0004 00000000 		.word	.LANCHOR4
+ 375              		.cfi_endproc
+ 376              	.LFE2:
+ 378              		.section	.text.uxCmdIntGetOutputBufferSizeBytes,"ax",%progbits
+ 379              		.align	1
+ 380              		.global	uxCmdIntGetOutputBufferSizeBytes
+ 381              		.code	16
+ 382              		.thumb_func
+ 384              	uxCmdIntGetOutputBufferSizeBytes:
+ 385              	.LFB3:
+ 224:../Generated_Code/CommandInterpreter.c **** {
+ 386              		.loc 1 224 0
+ 387              		.cfi_startproc
+ 226:../Generated_Code/CommandInterpreter.c **** }
+ 388              		.loc 1 226 0
+ 389 0000 2020     		mov	r0, #32
+ 390              		@ sp needed for prologue
+ 391 0002 7047     		bx	lr
+ 392              		.cfi_endproc
+ 393              	.LFE3:
+ 395              		.section	.text.pcCmdIntGetParameter,"ax",%progbits
+ 396              		.align	1
+ 397              		.global	pcCmdIntGetParameter
+ 398              		.code	16
+ 399              		.thumb_func
+ 401              	pcCmdIntGetParameter:
+ 402              	.LFB4:
+ 230:../Generated_Code/CommandInterpreter.c **** {
+ 403              		.loc 1 230 0
+ 404              		.cfi_startproc
+ 405              	.LVL45:
+ 406 0000 10B5     		push	{r4, lr}
+ 407              	.LCFI4:
+ 408              		.cfi_def_cfa_offset 8
+ 409              		.cfi_offset 4, -8
+ 410              		.cfi_offset 14, -4
+ 234:../Generated_Code/CommandInterpreter.c **** 	*pxParameterStringLength = 0;
+ 411              		.loc 1 234 0
+ 412 0002 0024     		mov	r4, #0
+ 413 0004 1460     		str	r4, [r2]
+ 236:../Generated_Code/CommandInterpreter.c **** 	while( uxParametersFound < uxWantedParameter )
+ 414              		.loc 1 236 0
+ 415 0006 A142     		cmp	r1, r4
+ 416 0008 1BD0     		beq	.L51
+ 417              	.LVL46:
+ 418              	.L56:
+ 240:../Generated_Code/CommandInterpreter.c **** 		while( ( ( *pcCommandString ) != 0x00 ) && ( ( *pcCommandString ) != ' ' ) )
+ 419              		.loc 1 240 0
+ 420 000a 0378     		ldrb	r3, [r0]
+ 421 000c 002B     		cmp	r3, #0
+ 422 000e 03D0     		beq	.L57
+ 240:../Generated_Code/CommandInterpreter.c **** 		while( ( ( *pcCommandString ) != 0x00 ) && ( ( *pcCommandString ) != ' ' ) )
+ 423              		.loc 1 240 0 is_stmt 0
+ 424 0010 202B     		cmp	r3, #32
+ 425 0012 01D0     		beq	.L57
+ 426              	.L44:
+ 242:../Generated_Code/CommandInterpreter.c **** 			pcCommandString++;
+ 427              		.loc 1 242 0 is_stmt 1
+ 428 0014 0130     		add	r0, r0, #1
+ 429              	.LVL47:
+ 430 0016 F8E7     		b	.L56
+ 431              	.LVL48:
+ 432              	.L57:
+ 246:../Generated_Code/CommandInterpreter.c **** 		while( ( ( *pcCommandString ) != 0x00 ) && ( ( *pcCommandString ) == ' ' ) )
+ 433              		.loc 1 246 0
+ 434 0018 0378     		ldrb	r3, [r0]
+ 435 001a 202B     		cmp	r3, #32
+ 436 001c 01D1     		bne	.L58
+ 437              	.L46:
+ 248:../Generated_Code/CommandInterpreter.c **** 			pcCommandString++;
+ 438              		.loc 1 248 0
+ 439 001e 0130     		add	r0, r0, #1
+ 440              	.LVL49:
+ 441 0020 FAE7     		b	.L57
+ 442              	.LVL50:
+ 443              	.L58:
+ 252:../Generated_Code/CommandInterpreter.c **** 		if( *pcCommandString != 0x00 )
+ 444              		.loc 1 252 0
+ 445 0022 002B     		cmp	r3, #0
+ 446 0024 0FD0     		beq	.L52
+ 255:../Generated_Code/CommandInterpreter.c **** 			uxParametersFound++;
+ 447              		.loc 1 255 0
+ 448 0026 0134     		add	r4, r4, #1
+ 449              	.LVL51:
+ 257:../Generated_Code/CommandInterpreter.c **** 			if( uxParametersFound == uxWantedParameter )
+ 450              		.loc 1 257 0
+ 451 0028 8C42     		cmp	r4, r1
+ 452 002a EED1     		bne	.L56
+ 257:../Generated_Code/CommandInterpreter.c **** 			if( uxParametersFound == uxWantedParameter )
+ 453              		.loc 1 257 0 is_stmt 0
+ 454 002c 041C     		mov	r4, r0
+ 455              	.LVL52:
+ 456              	.L48:
+ 261:../Generated_Code/CommandInterpreter.c **** 				while( ( ( *pcCommandString ) != 0x00 ) && ( ( *pcCommandString ) != ' ' ) )
+ 457              		.loc 1 261 0 is_stmt 1
+ 458 002e 2178     		ldrb	r1, [r4]
+ 459 0030 0029     		cmp	r1, #0
+ 460 0032 09D0     		beq	.L40
+ 261:../Generated_Code/CommandInterpreter.c **** 				while( ( ( *pcCommandString ) != 0x00 ) && ( ( *pcCommandString ) != ' ' ) )
+ 461              		.loc 1 261 0 is_stmt 0
+ 462 0034 2029     		cmp	r1, #32
+ 463 0036 07D0     		beq	.L40
+ 464              	.L49:
+ 263:../Generated_Code/CommandInterpreter.c **** 					( *pxParameterStringLength )++;
+ 465              		.loc 1 263 0 is_stmt 1
+ 466 0038 1368     		ldr	r3, [r2]
+ 264:../Generated_Code/CommandInterpreter.c **** 					pcCommandString++;
+ 467              		.loc 1 264 0
+ 468 003a 0134     		add	r4, r4, #1
+ 469              	.LVL53:
+ 263:../Generated_Code/CommandInterpreter.c **** 					( *pxParameterStringLength )++;
+ 470              		.loc 1 263 0
+ 471 003c 0133     		add	r3, r3, #1
+ 472 003e 1360     		str	r3, [r2]
+ 473 0040 F5E7     		b	.L48
+ 474              	.LVL54:
+ 475              	.L51:
+ 232:../Generated_Code/CommandInterpreter.c **** const signed char *pcReturn = NULL;
+ 476              		.loc 1 232 0
+ 477 0042 081C     		mov	r0, r1
+ 478              	.LVL55:
+ 479 0044 00E0     		b	.L40
+ 480              	.LVL56:
+ 481              	.L52:
+ 482 0046 181C     		mov	r0, r3
+ 483              	.LVL57:
+ 484              	.L40:
+ 277:../Generated_Code/CommandInterpreter.c **** }
+ 485              		.loc 1 277 0
+ 486              		@ sp needed for prologue
+ 487 0048 10BD     		pop	{r4, pc}
+ 488              		.cfi_endproc
+ 489              	.LFE4:
+ 491              		.section	.bss.cOutputBuffer,"aw",%nobits
+ 492              		.set	.LANCHOR4,. + 0
+ 495              	cOutputBuffer:
+ 496 0000 00000000 		.space	32
+ 496      00000000 
+ 496      00000000 
+ 496      00000000 
+ 496      00000000 
+ 497              		.section	.bss.pxCommand.4446,"aw",%nobits
+ 498              		.align	2
+ 499              		.set	.LANCHOR0,. + 0
+ 502              	pxCommand.4446:
+ 503 0000 00000000 		.space	4
+ 504              		.section	.data.pxLastCommandInList.4400,"aw",%progbits
+ 505              		.align	2
+ 506              		.set	.LANCHOR2,. + 0
+ 509              	pxLastCommandInList.4400:
+ 510 0000 00000000 		.word	xRegisteredCommands
+ 511              		.section	.rodata.xHelpCommand,"a",%progbits
+ 512              		.align	2
+ 515              	xHelpCommand:
+ 516 0000 A8000000 		.word	.LC12
+ 517 0004 AD000000 		.word	.LC13
+ 518 0008 00000000 		.word	prvHelpCommand
+ 519 000c 00       		.byte	0
+ 520 000d 000000   		.space	3
+ 521              		.section	.bss.pxCommand.4410,"aw",%nobits
+ 522              		.align	2
+ 523              		.set	.LANCHOR3,. + 0
+ 526              	pxCommand.4410:
+ 527 0000 00000000 		.space	4
+ 528              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 529              	.LC7:
+ 530 0000 496E636F 		.ascii	"Incorrect command parameter(s).  Enter \"help\" to "
+ 530      72726563 
+ 530      7420636F 
+ 530      6D6D616E 
+ 530      64207061 
+ 531 0031 76696577 		.ascii	"view a list of available commands.\015\012\015\012\000"
+ 531      2061206C 
+ 531      69737420 
+ 531      6F662061 
+ 531      7661696C 
+ 532              	.LC9:
+ 533 0058 436F6D6D 		.ascii	"Command not recognised.  Enter \"help\" to view a l"
+ 533      616E6420 
+ 533      6E6F7420 
+ 533      7265636F 
+ 533      676E6973 
+ 534 0089 69737420 		.ascii	"ist of available commands.\015\012\015\012\000"
+ 534      6F662061 
+ 534      7661696C 
+ 534      61626C65 
+ 534      20636F6D 
+ 535              	.LC12:
+ 536 00a8 68656C70 		.ascii	"help\000"
+ 536      00
+ 537              	.LC13:
+ 538 00ad 68656C70 		.ascii	"help: Lists all the registered commands\015\012\000"
+ 538      3A204C69 
+ 538      73747320 
+ 538      616C6C20 
+ 538      74686520 
+ 539              		.section	.data.xRegisteredCommands,"aw",%progbits
+ 540              		.align	2
+ 541              		.set	.LANCHOR1,. + 0
+ 544              	xRegisteredCommands:
+ 545 0000 00000000 		.word	xHelpCommand
+ 546 0004 00000000 		.word	0
+ 547              		.text
+ 548              	.Letext0:
+ 549              		.file 2 "C:/Freescale/CW MCU v10.6/MCU/ARM_GCC_Support/ewl/EWL_C/include/size_t.h"
+ 550              		.file 3 "../Generated_Code/CommandInterpreter.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 CommandInterpreter.c
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:18     .text.prvHelpCommand:00000000 $t
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:22     .text.prvHelpCommand:00000000 prvHelpCommand
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:72     .text.prvHelpCommand:00000024 $d
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:78     .text.xCmdIntRegisterCommand:00000000 $t
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:83     .text.xCmdIntRegisterCommand:00000000 xCmdIntRegisterCommand
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:162    .text.xCmdIntRegisterCommand:0000003c $d
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:167    .text.xCmdIntProcessCommand:00000000 $t
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:172    .text.xCmdIntProcessCommand:00000000 xCmdIntProcessCommand
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:350    .text.xCmdIntProcessCommand:000000b0 $d
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:358    .text.pcCmdIntGetOutputBuffer:00000000 $t
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:363    .text.pcCmdIntGetOutputBuffer:00000000 pcCmdIntGetOutputBuffer
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:374    .text.pcCmdIntGetOutputBuffer:00000004 $d
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:379    .text.uxCmdIntGetOutputBufferSizeBytes:00000000 $t
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:384    .text.uxCmdIntGetOutputBufferSizeBytes:00000000 uxCmdIntGetOutputBufferSizeBytes
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:396    .text.pcCmdIntGetParameter:00000000 $t
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:401    .text.pcCmdIntGetParameter:00000000 pcCmdIntGetParameter
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:495    .bss.cOutputBuffer:00000000 cOutputBuffer
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:496    .bss.cOutputBuffer:00000000 $d
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:498    .bss.pxCommand.4446:00000000 $d
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:502    .bss.pxCommand.4446:00000000 pxCommand.4446
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:505    .data.pxLastCommandInList.4400:00000000 $d
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:509    .data.pxLastCommandInList.4400:00000000 pxLastCommandInList.4400
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:544    .data.xRegisteredCommands:00000000 xRegisteredCommands
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:512    .rodata.xHelpCommand:00000000 $d
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:515    .rodata.xHelpCommand:00000000 xHelpCommand
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:522    .bss.pxCommand.4410:00000000 $d
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:526    .bss.pxCommand.4410:00000000 pxCommand.4410
+C:\Users\Franco\AppData\Local\Temp\ccvVaslS.s:540    .data.xRegisteredCommands:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+strncpy
+pvPortMalloc
+vPortEnterCritical
+vPortExitCritical
+strlen
+strncmp
