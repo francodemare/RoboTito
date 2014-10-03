@@ -1,0 +1,2 @@
+El repositorio lo puse donde tengo el workspace del proyecto para que los commits se hagan directamente.
+Ahi subi el proyecto con el freeRtos con dos Pwm como para ver como lo vamos a hacer. Tiene un par de comentarios.
