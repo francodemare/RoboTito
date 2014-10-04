@@ -6,22 +6,20 @@
  *      Author: Franco
  */
 
-void Movimiento_irHaciaAdelate(){
-	PWM_TraccionTrasera_Enable();
-	PWM_TraccionTrasera_SetDutyMS(NULL,50);
-	PWM_TraccionTrasera_Disable();
+#include "Motor.h"
+
+void Movimiento_irHaciaAdelate(Motor *motor,unsigned char cantVelocidad){
+	Motor_setDireccion(motor,ADELANTE);
+	Motor_setVelocidad(motor,cantVelocidad);
 }
 
-void Movimiento_irHaciaAtras(){
-	PWM_TraccionTrasera_Enable();
-	// Invertir la marcha
-	PWM_TraccionTrasera_SetDutyMS(NULL,50);
-	// Avanzar por un determinado tiempo
-	PWM_TraccionTrasera_Disable();
+void Movimiento_irHaciaAtras(Motor *motor,unsigned char cantVelocidad){
+	Motor_setDireccion(motor,ADELANTE);
+	Motor_setVelocidad(motor,cantVelocidad);
 }
 
 void Movimiento_DoblarDerecha(){
-	PWM_TraccionDelantera_Enable();				// Suponemos que el ciclio al 50% doblaria toda la rueda
+	/*// Suponemos que el ciclio al 50% doblaria toda la rueda
 	// Mandar señal de manera tal de girar el motor para colocar las ruedas mirando a la derecha
 	PWM_TraccionDelantera_SetDutyMS(NULL,50);
 	PWM_TraccionTrasera_Enable();
@@ -29,11 +27,11 @@ void Movimiento_DoblarDerecha(){
 	// Avanzar por un determinado tiempo hasta que el auta alla doblado del todo
 	PWM_TraccionTrasera_Disable();
 	// Poner la rueda derecho
-	PWM_TraccionDelantera_Disable();
+	PWM_TraccionDelantera_Disable();*/
 }
 
 void Movimiento_DoblarIzquierda(){
-	PWM_TraccionDelantera_Enable();				// Suponemos que el ciclio al 50% doblaria toda la rueda
+	/*PWM_TraccionDelantera_Enable();				// Suponemos que el ciclio al 50% doblaria toda la rueda
 	// Mandar señal de manera tal de girar el motor para colocar las ruedas mirando a la izquierda
 	PWM_TraccionDelantera_SetDutyMS(NULL,50);
 	PWM_TraccionTrasera_Enable();
@@ -41,5 +39,19 @@ void Movimiento_DoblarIzquierda(){
 	// Avanzar por un determinado tiempo hasta que el auta alla doblado del todo
 	PWM_TraccionTrasera_Disable();
 	// Poner la rueda derecho
-	PWM_TraccionDelantera_Disable();
+	PWM_TraccionDelantera_Disable();*/
 }
+
+void Movimiento_IniciarDefault(Motor *motor){
+	Motor_ArrancarDefault(motor);
+}
+
+void Movimiento_Iniciar(Motor *motor,unsigned char cantVelocidad){
+	Motor_Arrancar(motor,cantVelocidad);
+}
+
+void Movimiento_Frenar(Motor *motor){
+	Motor_Parar(motor);
+}
+
+

@@ -8,12 +8,18 @@
 #ifndef MOVIMIENTO_H_
 #define MOVIMIENTO_H_
 
-void Movimiento_irHaciaAdelante();
+void Movimiento_irHaciaAdelante(Motor *,unsigned char);
 
-void Movimiento_irHaciaAtras();
+void Movimiento_irHaciaAtras(Motor *,unsigned char);
 
 void Movimiento_DoblarDerecha();
 
 void Movimiento_DoblarIzquierda();
+
+void Movimiento_IniciarDefault(Motor *);
+
+void Movimiento_Iniciar(Motor *,unsigned char);
+
+void Movimiento_Frenar(Motor *);
 
 #endif /* MOVIMIENTO_H_ */
