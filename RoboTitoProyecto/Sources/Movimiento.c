@@ -6,7 +6,7 @@
  *      Author: Franco
  */
 
-void Movimeinto_irHaciaAdelate(){
+void Movimiento_irHaciaAdelate(){
 	PWM_TraccionTrasera_Enable();
 	PWM_TraccionTrasera_SetDutyMS(NULL,50);
 	PWM_TraccionTrasera_Disable();
