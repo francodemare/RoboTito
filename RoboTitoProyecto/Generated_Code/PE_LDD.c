@@ -5,7 +5,7 @@
 **     Processor   : MKL25Z128VLK4
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-03, 19:13, # CodeGen: 4
+**     Date/Time   : 2014-10-04, 13:26, # CodeGen: 6
 **     Abstract    :
 **
 **     Settings    :
@@ -147,12 +147,12 @@ bool PE_PeripheralUsed(uint32_t PrphBaseAddress)
   switch (PrphBaseAddress) {
     /* Base address allocated by peripheral(s) SysTick */
     case 0xE000E010UL:
-    /* Base address allocated by peripheral(s) PTB */
-    case 0x400FF040UL:
     /* Base address allocated by peripheral(s) TPM0 */
     case 0x40038000UL:
     /* Base address allocated by peripheral(s) TPM1 */
     case 0x40039000UL:
+    /* Base address allocated by peripheral(s) PTE */
+    case 0x400FF100UL:
       result = TRUE;
       break;
     default:

@@ -1,0 +1,26 @@
+/*
+ * Motor.h
+ *
+ *  Created on: Oct 4, 2014
+ *      Author: lau-Desktop
+ */
+
+#ifndef MOTOR_H_
+#define MOTOR_H_
+
+/*
+ * Se arranca el motor: 
+ * 
+ * 
+ * Velocidad = VelocidadDefault
+ * Direccion = Adelante
+ */
+void Motor_ArrancarDefault(Motor *m);
+void Motor_Arrancar(Motor *m,unsigned char cantVelocidad);
+void Motor_setDireccion(Motor *m,DIRECCION dir);
+void Motor_cambiarDireccion(Motor *m);
+void Motor_setVelocidad(Motor *m,unsigned char cantVelocidad);
+int Motor_getCorriente();
+void Motor_Parar(Motor *m);
+
+#endif /* MOTOR_H_ */

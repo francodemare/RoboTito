@@ -8,14 +8,18 @@
 #ifndef MOTOR_H_
 #define MOTOR_H_
 
-typedef enum Direction {ADELANTE,ATRAS} DIRECCION ;
-typedef enum State {ANDANDO,PARADO} ESTADO;
+typedef enum DIRECCION_ {ADELANTE,ATRAS} DIRECCION ;
+typedef enum ESTADO_ {ANDANDO,PARADO} ESTADO;
 
 struct Motor{
 	unsigned char id;
 	ESTADO estado;
 	DIRECCION direccion;
-	unsigned char velocidad; //La velocida es en un rango de [0..100]
+	unsigned char velocidad; /* La velocidad en un rango de [0..100] */
+	LDD_TDeviceData *PWMdeviceData; /* LDD device para controlar PWM */
+	LDD_TError (*SetRatio16)(LDD_TDeviceData*, uint16_t); /* Funcion para setear el ratio */
+	LDD_TDeviceData *DIRdeviceData; /* LDD device para controlar la Direccion */
+	void (*DirPutVal)(LDD_TDeviceData *, bool); /* Funcion para setear la Direccion */
 };
 
 typedef struct Motor Motor;

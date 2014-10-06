@@ -5,7 +5,7 @@
 **     Processor   : MKL25Z128VLK4
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-03, 19:15, # CodeGen: 5
+**     Date/Time   : 2014-10-04, 13:26, # CodeGen: 6
 **     Abstract    :
 **
 **     Settings    :
@@ -63,16 +63,12 @@
 #include "FRTOS1.h"
 #include "RTOSTICKLDD1.h"
 #include "UTIL1.h"
-#include "LED1.h"
-#include "LEDpin3.h"
-#include "BitIoLdd3.h"
-#include "LED2.h"
-#include "LEDpin4.h"
-#include "BitIoLdd4.h"
 #include "PWM_TraccionTrasera.h"
 #include "TU1.h"
 #include "PWM_TraccionDelantera.h"
 #include "TU2.h"
+#include "TraccionDelantera_Direccion.h"
+#include "TraccionTrasera_Direccion.h"
 
 
 /*

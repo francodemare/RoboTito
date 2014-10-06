@@ -1,0 +1,39 @@
+/*
+ * Motor.c
+ *
+ *  Created on: Oct 4, 2014
+ *      Author: lau-Desktop
+ */
+
+typedef enum Estate {ADELANTE,ATRAS,PARADO} ESTADO ;
+
+
+struct Motor{
+	ESTADO estado
+	velocidad
+};
+
+
+void Motor_Arrancar(){
+	PWM_TraccionTrasera_Enable();
+	PWM_TraccionDelantera_Enable();		
+}
+
+
+void Motor_setDireccion(Motor d){
+	
+}
+
+void Motor_setVelocidad(Velocidad cantVelocidad){
+	
+}
+
+int Motor_getCorriente(){
+	/*Por el momento no tenemos para sensar la corriente del motor*/
+}
+
+void Motor_Parar(){
+	PWM_TraccionTrasera_Disable();
+	PWM_TraccionDelantera_Disable();
+}
+

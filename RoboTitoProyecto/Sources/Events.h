@@ -26,16 +26,12 @@
 #include "FRTOS1.h"
 #include "RTOSTICKLDD1.h"
 #include "UTIL1.h"
-#include "LED1.h"
-#include "LEDpin3.h"
-#include "BitIoLdd3.h"
-#include "LED2.h"
-#include "LEDpin4.h"
-#include "BitIoLdd4.h"
 #include "PWM_TraccionTrasera.h"
 #include "TU1.h"
 #include "PWM_TraccionDelantera.h"
 #include "TU2.h"
+#include "TraccionDelantera_Direccion.h"
+#include "TraccionTrasera_Direccion.h"
 #include "PE_LDD.h"
 
 void Cpu_OnNMIINT(void);

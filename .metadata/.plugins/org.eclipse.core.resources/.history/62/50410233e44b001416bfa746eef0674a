@@ -1,0 +1,60 @@
+/*
+ * Motor.c
+ *
+ *  Created on: Oct 4, 2014
+ *      Author: lau-Desktop
+ */
+
+#include Motor_PWM.h
+
+#define VELOCIDADDEFAULT 50
+
+typedef enum Direction {ADELANTE,ATRAS} DIRECCION ;
+typedef enum State {ANDANDO,PARADO} ESTADO;
+
+struct Motor{
+	unsigned char id;
+	ESTADO estado;
+	DIRECCION direccion;
+	unsigned char velocidad; //La velocida es en un rango de [0..100]
+};
+
+typedef struct Motor Motor;
+
+
+void Motor_Arrancar(Motor *m){
+	m->estado = ANDANDO;
+	m->direccion = 	ADELANTE;
+	m->velocidad = VELOCIDADDEFAULT;
+}
+
+void Motor_Arrancar(Motor *m,unsigned char cantVelocidad){
+	m->estado = ANDANDO;
+	m->direccion = 	ADELANTE;
+	m->velocidad = cantVelocidad;
+}
+
+void Motor_setDireccion(Motor *m,DIRECCION dir){
+	m->direccion = dir;
+}
+
+void Motor_cambiarDireccion(Motor *m){
+	if(m->direccion == ADELANTE){
+		m->direccion = ATRAS;
+	}else{
+		m->direccion = ADELANTE;
+	}
+}
+
+void Motor_setVelocidad(Motor *m,unsigned char cantVelocidad){
+	m->velocidad = cantVelocidad;
+}
+
+int Motor_getCorriente(){
+	/*Por el momento no tenemos para sensar la corriente del motor*/
+}
+
+void Motor_Parar(Motor *m){
+	m->estado = PARADO;
+}
+

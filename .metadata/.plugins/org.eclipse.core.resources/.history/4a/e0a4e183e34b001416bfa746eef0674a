@@ -1,0 +1,42 @@
+/*
+ * Motor_PWM.c
+ *
+ *  Created on: Oct 4, 2014
+ *      Author: lau-Desktop
+ */
+
+
+
+void Motor_PWM_Arrancar(unsigned char id){
+	if(id == 1){
+		PWM_TraccionDelantera_Enable();
+	}else{
+		PWM_TraccionTrasera_Enable();
+	}
+}
+
+void MOTOR_PWM_setVelocidad(unsigned char id,unsigned char velocidad){
+	if(id == 1){
+		PWM_TraccionDelantera_SetDutyMS(NULL,velocidad);
+	}else{
+		PWM_TraccionTrasera_SetDutyMS(NULL,velocidad);
+	}
+}
+
+void MOTOR_PWM_setDireccion(unsigned char id,unsigned char direccion){
+	if(id == 1){
+		
+	}else{
+		
+	}
+}
+
+void Motor_PWM_Parar(unsigned char id){
+	if(id == 1){
+		PWM_TraccionDelantera_Disable();
+	}else{
+		PWM_TraccionTrasera_Disable();
+	}
+}
+
+

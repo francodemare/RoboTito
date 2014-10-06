@@ -29,12 +29,12 @@
 \page page_components Components 
 
 - \subpage RTOSTICKLDD1
-- \subpage BitIoLdd3
-- \subpage BitIoLdd4
 - \subpage TU1
 - \subpage PWM_TraccionTrasera
 - \subpage TU2
 - \subpage PWM_TraccionDelantera
+- \subpage TraccionDelantera_Direccion
+- \subpage TraccionTrasera_Direccion
 
 
 */

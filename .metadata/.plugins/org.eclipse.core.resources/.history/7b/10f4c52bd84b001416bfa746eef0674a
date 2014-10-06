@@ -1,0 +1,25 @@
+/*
+ * Motor.c
+ *
+ *  Created on: Oct 4, 2014
+ *      Author: lau-Desktop
+ */
+
+void Motor_Arrancar (){
+	PWM_TraccionTrasera_Enable();
+	PWM_TraccionDelantera_Enable();		
+}
+
+void Motor_Adelante (Speed cantSpeed, Time cantTime){
+	
+}
+
+void Motor_Atras (Speed cantSpeed, Time cantTime){
+	
+}
+
+void Motor_Parar(){
+	PWM_TraccionTrasera_Disable();
+	PWM_TraccionDelantera_Disable();
+}
+

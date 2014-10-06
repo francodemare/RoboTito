@@ -811,10 +811,10 @@ PE_DEBUGHALT();
       <EmptySection_DummyValue />
     </Events>
   </Bean>
-  <Bean name="PWM1" type="PWM_LDD">
+  <Bean name="PWM_TraccionTrasera" type="PWM_LDD">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="PWM1" />
+      <Component_name v="PWM_TraccionTrasera" />
       <Period_device v="TPM0_MOD" />
       <Duty_device v="TPM0_C0V" />
       <Output_pin v="PTD0/SPI0_PCS0/TPM0_CH0" />
@@ -971,10 +971,10 @@ PE_DEBUGHALT();
       <event name="OnChannel7" v="don&amp;apos;t generate code" />
     </Events>
   </Bean>
-  <Bean name="PWM2" type="PWM_LDD">
+  <Bean name="PWM_TraccionDelantera" type="PWM_LDD">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="PWM2" />
+      <Component_name v="PWM_TraccionDelantera" />
       <Period_device v="TPM1_MOD" />
       <Duty_device v="TPM1_C0V" />
       <Output_pin v="ADC0_DP0/ADC0_SE0/PTE20/TPM1_CH0/UART0_TX" />

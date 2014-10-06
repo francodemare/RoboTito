@@ -7,7 +7,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-03, 19:15, # CodeGen: 5
+**     Date/Time   : 2014-10-04, 13:26, # CodeGen: 6
 **     Abstract    :
 **
 **     Settings    :
@@ -63,16 +63,12 @@
 #include "FRTOS1.h"
 #include "RTOSTICKLDD1.h"
 #include "UTIL1.h"
-#include "LED1.h"
-#include "LEDpin3.h"
-#include "BitIoLdd3.h"
-#include "LED2.h"
-#include "LEDpin4.h"
-#include "BitIoLdd4.h"
 #include "PWM_TraccionTrasera.h"
 #include "TU1.h"
 #include "PWM_TraccionDelantera.h"
 #include "TU2.h"
+#include "TraccionDelantera_Direccion.h"
+#include "TraccionTrasera_Direccion.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
@@ -138,10 +134,9 @@ void __init_hardware(void)
   /* System clock initialization */
   /* SIM_CLKDIV1: OUTDIV1=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,OUTDIV4=3,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0 */
   SIM_CLKDIV1 = (SIM_CLKDIV1_OUTDIV1(0x00) | SIM_CLKDIV1_OUTDIV4(0x03)); /* Set the system prescalers to safe value */
-  /* SIM_SCGC5: PORTE=1,PORTD=1,PORTB=1,PORTA=1 */
+  /* SIM_SCGC5: PORTE=1,PORTD=1,PORTA=1 */
   SIM_SCGC5 |= SIM_SCGC5_PORTE_MASK |
                SIM_SCGC5_PORTD_MASK |
-               SIM_SCGC5_PORTB_MASK |
                SIM_SCGC5_PORTA_MASK;   /* Enable clock gate for ports to enable pin routing */
   if ((PMC_REGSC & PMC_REGSC_ACKISO_MASK) != 0x0U) {
     /* PMC_REGSC: ACKISO=1 */
@@ -253,14 +248,6 @@ void PE_low_level_init(void)
   /* NVIC_IPR1: PRI_6=0 */
   NVIC_IPR1 &= (uint32_t)~(uint32_t)(NVIC_IP_PRI_6(0xFF));
   /* ### FreeRTOS "FRTOS1" init code ... */
-  /* ### BitIO_LDD "BitIoLdd3" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
-  (void)BitIoLdd3_Init(NULL);
-  /* ### LED "LED1" init code ... */
-  LED1_Init(); /* initializes the driver */
-  /* ### BitIO_LDD "BitIoLdd4" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
-  (void)BitIoLdd4_Init(NULL);
-  /* ### LED "LED2" init code ... */
-  LED2_Init(); /* initializes the driver */
   /* ### PWM_LDD "PWM_TraccionTrasera" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)PWM_TraccionTrasera_Init(NULL);
   /* ### PWM_LDD "PWM_TraccionDelantera" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */

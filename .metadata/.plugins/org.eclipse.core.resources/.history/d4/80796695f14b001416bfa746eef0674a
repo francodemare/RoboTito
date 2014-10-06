@@ -1,0 +1,57 @@
+/*
+ * Motor_PWM.c
+ *
+ *  Created on: Oct 4, 2014
+ *      Author: lau-Desktop
+ */
+
+#define VELOCIDADDEFAULT 50
+
+void Motor_PWM_ArrancarDefault(unsigned char id){
+	if(id == 1){
+		PWM_TraccionDelantera_Enable();
+		PWM_TraccionDelantera_SetDutyMS(NULL,VELOCIDADDEFAULT);
+		TraccionDelantera_Direccion_PutVal(1); //Hay que setear para que valla adelante por default nose si es 0 o 1
+	}else{
+		PWM_TraccionTrasera_Enable();
+		PWM_TraccionTrasera_SetDutyMS(NULL,VELOCIDADDEFAULT);
+		TraccionTrasera_Direccion_PutVal(1);
+	}
+}
+void Motor_PWM_Arrancar(unsigned char id,unsigned char cantVelocidad){
+	if(id == 1){
+		PWM_TraccionDelantera_Enable();
+		PWM_TraccionDelantera_SetDutyMS(NULL,cantVelocidad);
+		TraccionDelantera_Direccion_PutVal(1);
+	}else{
+		PWM_TraccionTrasera_Enable();
+		PWM_TraccionTrasera_SetDutyMS(NULL,cantVelocidad);
+		TraccionDelantera_Direccion_PutVal(1);
+	}
+}
+
+void MOTOR_PWM_setVelocidad(unsigned char id,unsigned char cantVelocidad){
+	if(id == 1){
+		PWM_TraccionDelantera_SetDutyMS(NULL,cantVelocidad);
+	}else{
+		PWM_TraccionTrasera_SetDutyMS(NULL,cantVelocidad);
+	}
+}
+
+void MOTOR_PWM_setDireccion(unsigned char id,unsigned char direccion){
+	if(id == 1){
+		TraccionDelantera_Direccion_PutVal(direccion);
+	}else{
+		TraccionTrasera_Direccion_PutVal(direccion);
+	}
+}
+
+void Motor_PWM_Parar(unsigned char id){
+	if(id == 1){
+		PWM_TraccionDelantera_Disable();
+	}else{
+		PWM_TraccionTrasera_Disable();
+	}
+}
+
+

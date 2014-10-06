@@ -5,42 +5,29 @@
  *      Author: lau-Desktop
  */
 
-#define VELOCIDADDEFAULT 50
+void Motor_PWM_Arrancar(Motor *m,uint8_t cantVelocidad){
+	uint16_t ratio;
 
-void Motor_PWM_Arrancar(unsigned char id,unsigned char cantVelocidad){
-	if(id == 1){
-		PWM_TraccionDelantera_Enable();
-		PWM_TraccionDelantera_SetDutyMS(NULL,cantVelocidad);
-		TraccionDelantera_Direccion_PutVal(1); 
-	}else{
-		PWM_TraccionTrasera_Enable();
-		PWM_TraccionTrasera_SetDutyMS(NULL,cantVelocidad); 
-		TraccionDelantera_Direccion_PutVal(1); //Hay que setear para que valla adelante por default nose si es 0 o 1
-	}
+	//La velocidad esta de 0 a 100 y el ratio es de 0 a 0xFFFF
+	ratio = (65535/100) * cantVelocidad;
+	m->SetRatio16(m->PWMdeviceData,ratio);
+	m->DirPutVal(m->DIRdeviceData,1); //Adelante dir = 1, Atras dir = 0
 }
 
-void MOTOR_PWM_setVelocidad(unsigned char id,unsigned char cantVelocidad){
-	if(id == 1){
-		PWM_TraccionDelantera_SetDutyMS(NULL,cantVelocidad);
-	}else{
-		PWM_TraccionTrasera_SetDutyMS(NULL,cantVelocidad);
-	}
+void MOTOR_PWM_setVelocidad(Motor *m,uint8_t cantVelocidad){
+	uint32_t ratio;
+
+	//La velocidad de 0 a 100 y el ratio es de 0 a 0xFFFF
+	ratio = (65535/100) * cantVelocidad;
+	m->SetRatio16(m->PWMdeviceData,(uint16_t)ratio);
 }
 
-void MOTOR_PWM_setDireccion(unsigned char id,unsigned char direccion){
-	if(id == 1){
-		TraccionDelantera_Direccion_PutVal(direccion);
-	}else{
-		TraccionTrasera_Direccion_PutVal(direccion);
-	}
+void MOTOR_PWM_setDireccion(Motor *m,uint8_t direccion){
+	m->DirPutVal(m->DIRdeviceData,direccion); //Adelante dir = 1, Atras dir = 0
 }
 
-void Motor_PWM_Parar(unsigned char id){
-	if(id == 1){
-		PWM_TraccionDelantera_Disable();
-	}else{
-		PWM_TraccionTrasera_Disable();
-	}
+void Motor_PWM_Parar(Motor *m){
+	m->SetRatio16(m->PWMdeviceData,0);
 }
 
 
