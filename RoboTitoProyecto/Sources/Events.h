@@ -24,7 +24,6 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 #include "FRTOS1.h"
-#include "RTOSTICKLDD1.h"
 #include "UTIL1.h"
 #include "PWM_TraccionTrasera.h"
 #include "TU1.h"
@@ -32,6 +31,7 @@
 #include "TU2.h"
 #include "TraccionDelantera_Direccion.h"
 #include "TraccionTrasera_Direccion.h"
+#include "WAIT1.h"
 #include "PE_LDD.h"
 
 void Cpu_OnNMIINT(void);
@@ -50,7 +50,7 @@ void Cpu_OnNMIINT(void);
 */
 
 
-void FRTOS1_vApplicationStackOverflowHook(xTaskHandle *pxTask, signed portCHAR *pcTaskName);
+void FRTOS1_vApplicationStackOverflowHook(xTaskHandle pxTask, char *pcTaskName);
 /*
 ** ===================================================================
 **     Event       :  FRTOS1_vApplicationStackOverflowHook (module Events)

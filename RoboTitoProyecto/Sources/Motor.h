@@ -8,22 +8,22 @@
 #ifndef MOTOR_H_
 #define MOTOR_H_
 
-typedef enum DIRECCION_ {ADELANTE,ATRAS} DIRECCION ;
-typedef enum ESTADO_ {ANDANDO,PARADO} ESTADO;
+#include "PE_Types.h"
 
-struct Motor{
-	unsigned char id;
-	ESTADO estado;
-	DIRECCION direccion;
-	unsigned char velocidad; /* La velocidad en un rango de [0..100] */
+struct Motor_{
+	uint8_t id;
+	uint8_t direccion;
+	uint8_t velocidad; /* La velocidad en un rango de [0..100] */
 	LDD_TDeviceData *PWMdeviceData; /* LDD device para controlar PWM */
 	LDD_TError (*SetRatio16)(LDD_TDeviceData*, uint16_t); /* Funcion para setear el ratio */
 	LDD_TDeviceData *DIRdeviceData; /* LDD device para controlar la Direccion */
 	void (*DirPutVal)(LDD_TDeviceData *, bool); /* Funcion para setear la Direccion */
 };
 
-typedef struct Motor Motor;
 
+typedef struct Motor_ Motor;
+
+typedef enum TIPO_MOTOR_ {DELANTERO,TRASERO} TIPO_MOTOR;
 
 /*
  * Se arranca el motor: 
@@ -32,34 +32,34 @@ typedef struct Motor Motor;
  * Direccion = Adelante
  * 
  */
-void Motor_ArrancarDefault(Motor *m);
+//void Motor_ArrancarDefault(Motor *m);
 
 /*
  *  Se arranca el motor
  *  
- *  Velocidad = cantVelocidad
- *  Direccion = Adelante
+ *  Velocidad
+ *  Direccion
  */
-void Motor_Arrancar(Motor *m,unsigned char cantVelocidad);
+void Motor_Arrancar(Motor *,uint8_t,uint8_t);
 
 /*
- * Se cambia manda la direccion al motor
+ * Se cambia la direccion del motor
  * 
  */
-void Motor_setDireccion(Motor *m,DIRECCION dir);
+void Motor_setDireccion(Motor *,uint8_t);
 
 /*
  * Se cambia la direccion al motor
  * 
  */
-void Motor_cambiarDireccion(Motor *m);
+void Motor_cambiarDireccion(Motor *);
 
 /*
  * 
  * Se setea la velocidad al motor
  * 
  */
-void Motor_setVelocidad(Motor *m,unsigned char cantVelocidad);
+void Motor_setVelocidad(Motor *,uint8_t cantVelocidad);
 
 /*
  * 
@@ -68,6 +68,9 @@ void Motor_setVelocidad(Motor *m,unsigned char cantVelocidad);
  * 
  */
 int Motor_getCorriente();
+
+
+Motor * Motor_getMotor(TIPO_MOTOR);
 
 /*
  * Se para el motor

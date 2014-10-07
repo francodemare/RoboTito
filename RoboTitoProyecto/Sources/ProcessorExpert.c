@@ -1,10 +1,10 @@
-/** ###################################################################
+/* ###################################################################
 **     Filename    : ProcessorExpert.c
 **     Project     : ProcessorExpert
 **     Processor   : MKL25Z128VLK4
 **     Version     : Driver 01.01
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2012-09-25, 10:04, # CodeGen: 0
+**     Date/Time   : 2014-10-07, 02:15, # CodeGen: 9
 **     Abstract    :
 **         Main module.
 **         This module contains user's application code.
@@ -13,6 +13,17 @@
 **         No public methods
 **
 ** ###################################################################*/
+/*!
+** @file ProcessorExpert.c
+** @version 01.01
+** @brief
+**         Main module.
+**         This module contains user's application code.
+*/         
+/*!
+**  @addtogroup ProcessorExpert_module ProcessorExpert module documentation
+**  @{
+*/         
 /* MODULE ProcessorExpert */
 
 
@@ -20,7 +31,6 @@
 #include "Cpu.h"
 #include "Events.h"
 #include "FRTOS1.h"
-#include "RTOSTICKLDD1.h"
 #include "UTIL1.h"
 #include "PWM_TraccionTrasera.h"
 #include "TU1.h"
@@ -28,28 +38,15 @@
 #include "TU2.h"
 #include "TraccionDelantera_Direccion.h"
 #include "TraccionTrasera_Direccion.h"
+#include "WAIT1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
+#include "App.h"
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-static portTASK_FUNCTION(Task1, pvParameters) {
-  (void)pvParameters; /* parameter not used */
-  for(;;) {
-    LED1_Neg();
-    FRTOS1_vTaskDelay(1000/portTICK_RATE_MS);
-  }
-}
-
-static portTASK_FUNCTION(Task2, pvParameters) {
-  (void)pvParameters; /* parameter not used */
-  for(;;) {
-    LED2_Neg();
-    FRTOS1_vTaskDelay(1050/portTICK_RATE_MS);
-  }
-}
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -61,27 +58,10 @@ int main(void)
   PE_low_level_init();
   /*** End of Processor Expert internal initialization.                    ***/
 
-  if (FRTOS1_xTaskCreate(
-        Task1,  /* pointer to the task */
-        (signed portCHAR *)"Task1", /* task name for kernel awareness debugging */
-        configMINIMAL_STACK_SIZE, /* task stack size */
-        (void*)NULL, /* optional task startup argument */
-        tskIDLE_PRIORITY,  /* initial priority */
-        (xTaskHandle*)NULL /* optional task handle to create */
-      ) != pdPASS) {
-    for(;;){}; /* Out of heap memory? */
-  }
-  if (FRTOS1_xTaskCreate(
-        Task2,  /* pointer to the task */
-        (signed portCHAR *)"Task2", /* task name for kernel awareness debugging */
-        configMINIMAL_STACK_SIZE, /* task stack size */
-        (void*)NULL, /* optional task startup argument */
-        tskIDLE_PRIORITY,  /* initial priority */
-        (xTaskHandle*)NULL /* optional task handle to create */
-      ) != pdPASS) {
-    for(;;){}; /* Out of heap memory */
-  }
-
+  
+  /* Write your code here */
+  /* For example: for(;;) { } */
+  App_run();
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
   #ifdef PEX_RTOS_START
@@ -94,10 +74,13 @@ int main(void)
 } /*** End of main routine. DO NOT MODIFY THIS TEXT!!! ***/
 
 /* END ProcessorExpert */
+/*!
+** @}
+*/
 /*
 ** ###################################################################
 **
-**     This file was created by Processor Expert 10.0 [05.03]
+**     This file was created by Processor Expert 10.3 [05.09]
 **     for the Freescale Kinetis series of microcontrollers.
 **
 ** ###################################################################

@@ -5,6 +5,9 @@
  *      Author: lau-Desktop
  */
 
+#include "Motor.h"
+#include "PE_Types.h"
+
 void Motor_PWM_Arrancar(Motor *m,uint8_t cantVelocidad){
 	uint16_t ratio;
 
